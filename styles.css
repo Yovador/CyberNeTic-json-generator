@@ -1,0 +1,44 @@
+.global{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.mainParam .branches-container{
+    height: 100%;
+}
+.mainParam{
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.parameter{
+    margin-left: 2rem;
+}
+
+.branches{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.floor{
+    background-color: beige;
+    display: grid;
+    margin: 2rem;
+
+}
+
+.branch{
+
+}
+
+.branches-container{
+    height: 100%;
+    overflow: hidden;
+    background-color: antiquewhite;
+}

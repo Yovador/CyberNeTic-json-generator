@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src = "./js/main.js" defer></script>
+    <link href="./styles.css" rel="stylesheet">
+    <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
+    
+</head>
+<body>
+    <div class="global">
+        <div class="mainParam" >
+            <div class="parameter">
+                <h4>Nom de la conversation : </h4>
+                <input id="convNameInput" type="text"></input>
+            </div>
+        
+            <div class="parameter">
+                <h4>Medium : </h4>
+                <input id="mediumInput" type="text"></input>
+            </div>
+        
+            <div class="parameter">
+                <h4>Personnage du joueur : </h4>
+                <input id="playerCharacterInput" type="text"></input>
+            </div>
+        
+            <div class="parameter">
+                <h4>Personnage non joueur : </h4>
+                <input id="npCharacterInput" type="text"></input>
+            </div>
+            <div class="parameter">
+                <h4>conversation suivante : </h4>
+                <input id="nextConversationInput" type="text"></input>
+            </div>
+    
+            <div class="parameter">
+                <a id="downloadAnchorElem" style="color: blue;">DOWNLOAD</a>
+            </div>
+        </div>
+    
+        <div class ="branches-container">
+            <div id="branches" class="branches">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
