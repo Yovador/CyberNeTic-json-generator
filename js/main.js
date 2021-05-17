@@ -9,7 +9,7 @@ class Floor {
     }
 }
 class BranchHTML{
-    constructor(branch, floor){
+    constructor(branch){
         this.branch = branch,
         this.parent= this.GetParent(),
         this.floor = this.GetFloor(),
@@ -70,7 +70,7 @@ let listOfFloor = []
 let allBranchesHTML = []
 
 allBranches.forEach(element => {
-    allBranchesHTML.push(new BranchHTML(element, 0))
+    allBranchesHTML.push(new BranchHTML(element))
 });
 
 const GetFloorByID = (id) =>{
@@ -93,10 +93,13 @@ const GenerateTree = (branches) =>{
             let parentD = document.getElementById("branches")
             let currentFloorID = `floor${branch.floor}`
                 let floorDiv
+                let firstfloor = false
+                if(listOfFloor[listOfFloor.length-1] == undefined ) firstfloor = true
                 if(GetFloorByID(currentFloorID) == null){
-                    let firstfloor = false
-                    if(listOfFloor[listOfFloor.length-1] == undefined ) firstfloor = true
                     floorDiv = CreateNewDiv("", parentD, currentFloorID, "floor", true)
+                    if(!firstfloor){
+                        GetFloorByID(`floor${branch.floor-1}`).div.appendChild(floorDiv)
+                    }
                     listOfFloor.push(new Floor (currentFloorID, floorDiv, 1))
                 }
                 else{
@@ -105,9 +108,9 @@ const GenerateTree = (branches) =>{
                     GetFloorByID(currentFloorID).branchNumber += 1
                     console.log(GetFloorByID(`floor${branch.floor - 1}`).branchNumber)
                 }
-
                 listOfBranch.push(branch.branch.id)
-                CreateNewDiv(BranchToHtml(branch.branch), floorDiv, null, "branch")
+
+                CreateNewDiv(BranchToHtml(branch.branch), floorDiv , null, "branch")
                 branch.branch.branchingPoint.possibilities.forEach(poss => {
                     if(!listOfBranch.includes(poss.branch)){
                         CreateChildren(branches, branch.FindBranchById(poss.branch))
@@ -236,14 +239,9 @@ let conversation = InitConversation()
 ExportJson(conversation)
 
 const AddZoom = () =>{
-    // just grab a DOM element
     let branches = document.querySelector('#branches')
-    
-    // And pass it to panzoom
     panzoom(branches)
 }
 
 AddZoom()
-
-
 
