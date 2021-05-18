@@ -45,6 +45,10 @@
 .branch{
     margin: 1rem;
     background-color: bisque;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5rem;
 }
 
 .branches-container{
@@ -52,4 +56,18 @@
     overflow: hidden;
     background-color: antiquewhite;
 
+}
+
+.message{
+    margin: 2rem;
+    padding: 1rem;
+    background-color: burlywood;
+}
+
+.branchName{
+    width: 20rem;
+}
+
+.branchingPoss{
+    background-color: cornsilk;
 }

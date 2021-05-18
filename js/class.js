@@ -19,7 +19,7 @@ class BranchingPoint {
     }
 }
 
-class Branche{
+class Branch{
     constructor(id, messagesList, branchingPoint){
         this.id = id,
         this.messagesList = messagesList,
@@ -28,7 +28,7 @@ class Branche{
 }
 
 const test = () =>{
-    let firstBranch = new Branche("1stbranch", [], null)
+    let firstBranch = new Branch("1stbranch", [], null)
     firstBranch.messagesList.push(new Message (true, new Content("text", "Salut"), 60) )
     firstBranch.messagesList.push(new Message (false, new Content("image", "Ca va ?"), 65) )
     firstBranch.branchingPoint = new BranchingPoint (
@@ -48,11 +48,11 @@ const test = () =>{
 
         ]) 
 
-    let oneA = new Branche("1A", [], null)
+    let oneA = new Branch("1A", [], null)
     oneA.messagesList.push(new Message (true, new Content("text", "Cava, Cool !"), 75) )
     oneA.branchingPoint = new BranchingPoint ( "stop", []) 
     
-    let oneB = new Branche("1B", [], null)
+    let oneB = new Branch("1B", [], null)
     oneB.messagesList.push(new Message (true, new Content("text", " cringe"), 75) )
     oneB.branchingPoint = new BranchingPoint ( "stop", []) 
 
@@ -167,4 +167,4 @@ const test = () =>{
 
 
 
-export {Content, Message, BranchingPoint, Branche, test}
+export {Content, Message, BranchingPoint, Branch, test}
