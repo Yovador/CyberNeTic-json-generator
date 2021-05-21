@@ -1058,7 +1058,13 @@ const GetAllBranchesHTML = () => {
 
 const AddZoom = () => {
     let branches = document.querySelector('#branches')
-    panzoom(branches)
+    panzoom(branches, {
+        beforeMouseDown: function(e) {
+          // allow mouse-down panning only if altKey is down. Otherwise - ignore
+          var shouldIgnore = !e.altKey;
+          return shouldIgnore;
+        }
+      })
 }
 
 const LoadFromFile = () =>{
