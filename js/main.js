@@ -292,15 +292,18 @@ const ShowOptionChoice = (poss) => {
 
     if (poss.possible) {
         allBranches.forEach(branchFromAll => {
-            switch (branchFromAll.id) {
-                case poss.branch:
-                    html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
-                    break;
-                default:
-                    html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
-                    break;
+            if(allBranches.indexOf(branchFromAll) !=0){
+                switch (branchFromAll.id) {
+                    case poss.branch:
+                        html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
+                        break;
+                    default:
+                        html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
+                        break;
+                }
             }
-        });
+            });
+
     }
     else {
         html += `<option value="none"> Pas de branche </option>`
@@ -349,17 +352,19 @@ const ShowOptionTest = (poss) => {
         <label> Branches suivantes: </label>
         <select class="branchIDNext"> 
     `
-
     allBranches.forEach(branchFromAll => {
-        switch (branchFromAll.id) {
-            case poss.branch:
-                html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
-                break;
-            default:
-                html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
-                break;
+        if(allBranches.indexOf(branchFromAll) !=0){        
+            switch (branchFromAll.id) {
+                case poss.branch:
+                    html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
+                    break;
+                default:
+                    html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
+                    break;
+            }
         }
-    });
+        });
+
 
 
     html += `</select>`
@@ -377,13 +382,16 @@ const ShowOptionChange = (poss) => {
         <select class="branchIDNext"> 
         `
     allBranches.forEach(branchFromAll => {
-        switch (branchFromAll.id) {
-            case poss.branch:
-                html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
-                break;
-            default:
-                html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
-                break;
+        if(allBranches.indexOf(branchFromAll) !=0){
+
+            switch (branchFromAll.id) {
+                case poss.branch:
+                    html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
+                    break;
+                default:
+                    html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
+                    break;
+            }
         }
     });
 
