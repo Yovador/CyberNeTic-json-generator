@@ -655,13 +655,13 @@ const AddAMessageToBranch = (buttonDiv) => {
     messageDiv.before(buttonDiv)
     let secondButton = buttonDiv.cloneNode(true)
     messageDiv.after(secondButton)
-    UpdateBranch()
+    UpdateConversation()
 }
 
 //Fonction supprimant une div puis met à jour l'arbre
 const RemoveADiv = (div) => {
     div.remove()
-    UpdateBranch()
+    UpdateConversation()
 }
 
 //Fonction ajoutant une Possibilité à un branching point
@@ -949,9 +949,23 @@ const ChangeBranching = (branchingDiv) => {
 
 }
 
+const ResetConversation = () =>{
+    conversation = {
+        Conversation : {
+            id: "",
+            startingBranch: "",
+            medium: "",
+            playerCharacter: "",
+            npCharacter: "",
+            nextConversation : ""
+        },
+        Branches:[new Branch("-0", [], new BranchingPoint("stop", []))]
+    }
+    Refresh(conversation)
+}
+
 const Refresh = (currentConv) => {
 
-    console.log(currentConv)
     //Mise à jour de allBranches et allBranchesHTML
     allBranches = currentConv.Branches
 
@@ -964,6 +978,11 @@ const Refresh = (currentConv) => {
 
     //Nous mettons à jour la conversation
     conversation = currentConv
+
+    LoadConversationInfo()
+
+    localStorage['conversation'] = JSON.stringify(conversation); 
+
 
     //Nous mettons à jour le lien de téléchargement
     ExportJson(conversation)
@@ -997,7 +1016,24 @@ const Refresh = (currentConv) => {
 
 }
 
-const UpdateBranch = () => {
+const LoadConversationInfo = () =>{
+    const convNameInput = document.getElementById("convNameInput");
+    convNameInput.value = conversation.Conversation.id
+
+    const mediumInput = document.getElementById("mediumInput");
+    mediumInput.value = conversation.Conversation.medium
+
+    const playerCharacterInput = document.getElementById("playerCharacterInput");
+    playerCharacterInput.value = conversation.Conversation.playerCharacter
+
+    const npCharacterInput = document.getElementById("npCharacterInput");
+    npCharacterInput.value = conversation.Conversation.npCharacter
+
+    const nextConversationInput = document.getElementById("nextConversationInput");
+    nextConversationInput.value = conversation.Conversation.nextConversation
+}
+
+const UpdateConversation = () => {
     //Nous récupérons depuis le HTML l'état des branches actuelles
     let currentConv = RetrieveData()
 
@@ -1046,13 +1082,19 @@ let allBranchesHTML = []
 
 let conversation
 
+var cachedConversation = localStorage['conversation'];
+if(cachedConversation != null){
+    conversation = JSON.parse(cachedConversation)
+    Refresh(conversation)
+}
+
 document.getElementById("jsonFile").addEventListener("change", function(){LoadFromFile()})
 GetAllBranchesHTML()
 GenerateTree(allBranchesHTML)
-UpdateBranch()
+UpdateConversation()
 
-document.getElementById("global").addEventListener('change', function () { UpdateBranch() })
-
+document.getElementById("global").addEventListener('change', function () { UpdateConversation() })
+document.getElementById("resetButton").addEventListener('click', function(){ResetConversation()})
 
 AddZoom()
 
