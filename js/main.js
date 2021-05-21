@@ -3,7 +3,7 @@ import { InitConversation } from "./conversation.js"
 import { ExportJson } from "./exportJson.js"
 
 const defaultMessage = { side: true, content: { type: "text", data: "" }, sendtime: 1 }
-const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: defaultMessage }
+const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { side: false, content: { type: "text", data: "" }, sendtime: 1 } }
 const defaultTestPoss = { branch: "", thresholds: [0, 1] }
 const defaultChangePoss = { branch: "" }
 class BranchHTML {
@@ -692,7 +692,6 @@ const RemovePoss = (branchDiv, num, possDiv) => {
 
 //Fonction supprimant une branche dans la conversation
 const DeleteABranch = (oldBranch) => {
-    console.log("Deleting", oldBranch)
     let isFirst = false
 
     //On regarde toute les branches, si la branche que l'on cherche à supprimer est la première,
@@ -709,7 +708,6 @@ const DeleteABranch = (oldBranch) => {
         //On cherche la branche actuelle
         conversation.Branches.forEach(branch => {
             if (branch.id == oldBranch.id) {
-                console.log(oldBranch.id)
                 //Si la branche que l'on cherche à supprimé n'est pas de type change
                 if (branch.branchingPoint.type != "change") {
                     //On cherche ensuite parmis toutes les branches les branches enfants de la branches que l'on cherche à supprimé
@@ -746,9 +744,7 @@ const CreateNewBranch = () => {
 }
 
 const DeleteUnusedBranch = (pDiv) => {
-    console.log(pDiv)
     let branchIndex = BranchHTML.FindBranchByDiv(pDiv.querySelector(".branch")).branch
-
     DeleteABranch(branchIndex)
 
 }
@@ -770,7 +766,6 @@ const GetNewBranchID = (allID) => {
 
 const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possID) => {
 
-
     const CreateNewPoss = (num, poss) => {
         let newPoss = []
         let allID = []
@@ -785,6 +780,7 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
             allID.push(possX.branch)
             newPoss.push(possX)
         }
+        console.log("poss", newPoss)
         return newPoss
     }
 
@@ -921,6 +917,7 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
     else if (replace == "remove") {
         RemovePoss()
     }
+
 
 
 
