@@ -145,6 +145,7 @@ const GenerateTree = (branches) => {
 
             //On créé et attribue la div de la branch
             //BranchToHtml génère le html
+            console.log(BranchToHtml(branch.branch))
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch", true)
 
 
@@ -186,11 +187,12 @@ const GenerateTree = (branches) => {
 
 //Fonction créant une nouvelle div
 const CreateNewDiv = (content, parent, id, classStyle, getDiv, customStyle) => {
+    console.log(content, parent, id, classStyle, getDiv, customStyle)
     const div = document.createElement('div');
     if (classStyle != null) { div.className = classStyle }
     if (id != null) { div.id = id }
     if (customStyle != null) { div.style = customStyle }
-    div.innerHTML = content
+    if (content != null) {div.innerHTML = content}
     if (parent != null) { parent.appendChild(div) } else { document.body.appendChild(div) }
     if (getDiv) { return div }
 }
@@ -1020,6 +1022,7 @@ const Refresh = (currentConv) => {
 }
 
 const LoadConversationInfo = () =>{
+    console.log(conversation)
     const convNameInput = document.getElementById("convNameInput");
     convNameInput.value = conversation.Parameters.id
 

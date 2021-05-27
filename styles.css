@@ -37,7 +37,7 @@
 }
 
 .floor{
-    background-color:rgba(99, 95, 134);
+    background-color:rgba(99, 95, 134, 1);
     display: flex;
     flex-direction: row;
     margin: 2rem;
@@ -48,24 +48,26 @@
 
 .branch{
     margin: 1rem;
-    background-color: rgb(174, 214, 220 );
+    background-color: rgba(239, 181, 163, 1);
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 5rem;
 }
 
+
+/* Fond */
 .branches-container{
     height: 100%;
     overflow: hidden;
-    background-color: rgba(49, 95, 114);
+    background-color: rgba(255, 231, 208, 1);
 
 }
 
 .message{
     margin: 2rem;
     padding: 1rem;
-    background-color: rgb(255, 128, 141);
+    background-color: rgba(190, 207, 226, 1);
 }
 
 .branchName{
@@ -73,5 +75,5 @@
 }
 
 .branchingPoss{
-    background-color: rgb(255, 154, 141);
+    background-color: rgba(92, 164, 169, 1);
 }
