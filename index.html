@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="./styles.css" rel="stylesheet">
     <script type="module" src = "./js/main.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
+    
     
 </head>
 <body>
@@ -16,37 +18,48 @@
         <button id="resetButton">Mettre la conversation à 0</button>
         <div class="mainParam" >
             <div class="parameter">
-                <label>Nom de la conversation : </label>
-                <input id="convNameInput" type="text" ></input>
+                <!-- <label>Nom de la conversation : </label>
+                <input id="convNameInput" type="text" ></input> -->
+                <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
+            </div>
+
+            <div class="parameter">
+                <!-- <label>Medium : </label>
+                <input id="mediumInput" type="text"></input> -->
+                <input class="form-control" id="mediumInput" type="text" placeholder="Medium">
             </div>
         
             <div class="parameter">
-                <label>Medium : </label>
-                <input id="mediumInput" type="text"></input>
+                <!-- <label>Personnage du joueur : </label>
+                <input id="playerCharacterInput" type="text"></input> -->
+                <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
             </div>
         
             <div class="parameter">
-                <label>Personnage du joueur : </label>
-                <input id="playerCharacterInput" type="text"></input>
-            </div>
-        
-            <div class="parameter">
-                <label>Personnage non joueur : </label>
-                <input id="npCharacterInput" type="text"></input>
+                <!-- <label>Personnage non joueur : </label>
+                <input id="npCharacterInput" type="text"></input> -->
+                <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
             </div>
             <div class="parameter">
-                <label>conversation suivante : </label>
-                <input id="nextConversationInput" type="text"></input>
+                <!-- <label>conversation suivante : </label>
+                <input id="nextConversationInput" type="text"></input> -->
+                <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
             </div>
     
             <div class="parameter">
                 <label> Exporter la conversation : </label>
                 <a id="downloadAnchorElem" style="color: blue;">DOWNLOAD</a>
             </div>
-            <div class="parameter">
+            <!-- <div class="parameter">
                 <label> Importer une conversation : </label>
                 <input id="jsonFile" type="file"/>
+            </div> -->
+            <form>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Importer une conversation :</label>
+                <input type="file" id="jsonFile" class="form-control-file" id="exampleFormControlFile1">
             </div>
+            </form>
         </div>
     
         <div class ="branches-container" id="branches-container">
@@ -54,5 +67,6 @@
             </div>
         </div>
     </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 </html>
