@@ -1,5 +1,5 @@
 {
-    "Conversation" : {
+    "Parameters" : {
         "id" : "chapitre1",
         "startingBranch": "C1Start",
         "medium": "sms",
@@ -12,7 +12,7 @@
 
         {
             "id":"C1Start",
-            "messagesList" : [
+            "messagesList" : [  
                 {"side":true, "content": { "type": "text", "data":"salut" }, "sendTime":60 },
                 {"side":true, "content": { "type": "text", "data":"ca va" }, "sendTime":65 },
                 {"side":true, "content": { "type": "text", "data":"quoi de neuf" }, "sendTime":70 }

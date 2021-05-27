@@ -1,4 +1,4 @@
-import { Content, Message, BranchingPoint, Branch, test } from "./class.js"
+import { Content, Message, BranchingPoint, Branch} from "./class.js"
 import { InitConversation } from "./conversation.js"
 import { ExportJson } from "./exportJson.js"
 
@@ -9,10 +9,10 @@ const defaultChangePoss = { branch: "" }
 class BranchHTML {
     constructor(branch) {
         this.branch = branch,
-            this.parent = this.GetParent(),
-            this.child = this.GetChild(),
-            this.div,
-            this.childsDiv
+        this.parent = this.GetParent(),
+        this.child = this.GetChild(),
+        this.div,
+        this.childsDiv
     }
 
     GetChild() {
@@ -69,7 +69,6 @@ class BranchHTML {
 
 
 }
-
 
 const GenerateTree = (branches) => {
     //Nous vidons la div contenant toutes les branches
@@ -639,12 +638,12 @@ const RetrieveData = () => {
     }
 
     //Nous attribuons toutes les informations que nous venons de récupéré à la variable conversation
-    conversation.Conversation.id = convName
-    conversation.Conversation.startingBranch = allBranches[0].id
-    conversation.Conversation.medium = medium
-    conversation.Conversation.playerCharacter = playerCharacter
-    conversation.Conversation.npCharacter = npCharacter
-    conversation.Conversation.nextConversation = nextConversation
+    conversation.Parameters.id = convName
+    conversation.Parameters.startingBranch = allBranches[0].id
+    conversation.Parameters.medium = medium
+    conversation.Parameters.playerCharacter = playerCharacter
+    conversation.Parameters.npCharacter = npCharacter
+    conversation.Parameters.nextConversation = nextConversation
 
     conversation.Branches = branches
 
@@ -754,7 +753,7 @@ const GetNewBranchID = (allID) => {
     let differentID = false
     let j = 0
     while (!differentID) {
-        id = conversation.Conversation.id + "-" + j
+        id = conversation.Parameters.id + "-" + j
         if (!allID.includes(id)) {
             differentID = true
         }
@@ -762,7 +761,6 @@ const GetNewBranchID = (allID) => {
     }
     return id
 }
-
 
 const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possID) => {
 
@@ -956,7 +954,7 @@ const ChangeBranching = (branchingDiv) => {
 
 const ResetConversation = () =>{
     conversation = {
-        Conversation : {
+        Parameters : {
             id: "",
             startingBranch: "",
             medium: "",
@@ -1023,19 +1021,19 @@ const Refresh = (currentConv) => {
 
 const LoadConversationInfo = () =>{
     const convNameInput = document.getElementById("convNameInput");
-    convNameInput.value = conversation.Conversation.id
+    convNameInput.value = conversation.Parameters.id
 
     const mediumInput = document.getElementById("mediumInput");
-    mediumInput.value = conversation.Conversation.medium
+    mediumInput.value = conversation.Parameters.medium
 
     const playerCharacterInput = document.getElementById("playerCharacterInput");
-    playerCharacterInput.value = conversation.Conversation.playerCharacter
+    playerCharacterInput.value = conversation.Parameters.playerCharacter
 
     const npCharacterInput = document.getElementById("npCharacterInput");
-    npCharacterInput.value = conversation.Conversation.npCharacter
+    npCharacterInput.value = conversation.Parameters.npCharacter
 
     const nextConversationInput = document.getElementById("nextConversationInput");
-    nextConversationInput.value = conversation.Conversation.nextConversation
+    nextConversationInput.value = conversation.Parameters.nextConversation
 }
 
 const UpdateConversation = () => {
@@ -1088,7 +1086,6 @@ const LoadFromFile = () =>{
 } 
 
 
-//let allBranches = test();
 let allBranches = [new Branch("-0", [], new BranchingPoint("stop", []))]
 
 let allBranchesHTML = []
