@@ -2,7 +2,7 @@
 const InitConversation = () =>{
     
     let conversation = {
-        Conversation: {
+        Parameters: {
             id: "",
             startingBranch:"",
             medium: "",
