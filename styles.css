@@ -37,7 +37,7 @@
 }
 
 .floor{
-    background-color: beige;
+    background-color:rgba(99, 95, 134);
     display: flex;
     flex-direction: row;
     margin: 2rem;
@@ -48,7 +48,7 @@
 
 .branch{
     margin: 1rem;
-    background-color: bisque;
+    background-color: rgb(174, 214, 220 );
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,14 +58,14 @@
 .branches-container{
     height: 100%;
     overflow: hidden;
-    background-color: antiquewhite;
+    background-color: rgba(49, 95, 114);
 
 }
 
 .message{
     margin: 2rem;
     padding: 1rem;
-    background-color: burlywood;
+    background-color: rgb(255, 128, 141);
 }
 
 .branchName{
@@ -73,5 +73,5 @@
 }
 
 .branchingPoss{
-    background-color: cornsilk;
+    background-color: rgb(255, 154, 141);
 }
