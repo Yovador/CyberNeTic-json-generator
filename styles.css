@@ -26,6 +26,10 @@
     margin-left: 2rem;
 }
 
+.btnmenu{
+    margin: 1px 60px 1px;
+}
+
 .branches{
     display: flex;
     flex-direction: column;
