@@ -37,7 +37,6 @@
 }
 
 .floor{
-    background-color:rgba(99, 95, 134, 1);
     display: flex;
     flex-direction: row;
     margin: 2rem;
@@ -45,7 +44,9 @@
 
 
 }
-
+.unused{
+    background-color: rgba(230, 170, 114);
+}
 .branch{
     margin: 1rem;
     background-color: rgba(239, 181, 163, 1);

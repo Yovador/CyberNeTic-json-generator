@@ -77,7 +77,7 @@ const GenerateTree = (branches) => {
     let listOfBranch = []
 
     const CreateUnusedBranch = () => {
-        let unusedBranchDiv = CreateNewDiv("", branchesDiv, "unusedBranch", "floor", true, "flex-direction: column;")
+        let unusedBranchDiv = CreateNewDiv("", branchesDiv, "unusedBranch", "floor unused", true, "flex-direction: column;")
 
         let html = ""
 
