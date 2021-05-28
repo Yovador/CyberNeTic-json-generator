@@ -270,6 +270,10 @@ const RetrieveCharacterSet = () =>{
 
 }
 
+const  ResetCharacters = () =>{
+    Refresh(EmptyCharacterSet())
+}
+
 const Refresh = (newCharacterSet) =>{
     parentDiv.innerHTML = ""
     currentCharacterSet = newCharacterSet
@@ -309,3 +313,4 @@ Refresh(currentCharacterSet)
 document.getElementById("global").addEventListener('change', function () { onUpdate() })
 document.getElementById("addCharacter").addEventListener('click', function () { AddNewCharacter() })
 document.getElementById("jsonFile").addEventListener("change", function(){LoadFromFile()})
+document.getElementById("resetButton").addEventListener('click', function(){ResetCharacters()})
