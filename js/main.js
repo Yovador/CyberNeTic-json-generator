@@ -1,6 +1,7 @@
 import { Content, Message, BranchingPoint, Branch} from "./class.js"
 import { InitConversation } from "./conversation.js"
 import { ExportJson } from "./exportJson.js"
+import AddZoom from "./addZoom.js"
 
 const defaultMessage = { side: true, content: { type: "text", data: "" }, sendtime: 1 }
 const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { side: false, content: { type: "text", data: "" }, sendtime: 1 } }
@@ -1057,18 +1058,7 @@ const GetAllBranchesHTML = () => {
     });
 }
 
-const AddZoom = () => {
-    let branches = document.querySelector('#branches')
-    panzoom(branches, {
-        //Désactive le zoom en double cliquant
-        zoomDoubleClickSpeed: 1, 
-        beforeMouseDown: function(e) {
-            // allow mouse-down panning only if altKey is down. Otherwise - ignore
-            var shouldIgnore = !e.altKey;
-            return shouldIgnore;
-        }
-      })
-}
+
 
 const LoadFromFile = () =>{
     let currentConv
@@ -1109,5 +1099,5 @@ UpdateConversation()
 document.getElementById("global").addEventListener('change', function () { UpdateConversation() })
 document.getElementById("resetButton").addEventListener('click', function(){ResetConversation()})
 
-AddZoom()
+AddZoom(document.querySelector('#branches'))
 
