@@ -92,3 +92,23 @@
 .box{
     border-radius: 1em;
 }
+
+.characterSheet{
+    background-color:beige;
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.characterList{
+    display: flex;
+    flex-direction: row;
+    padding:  2rem;
+    background-color: antiquewhite;
+}
+
+.them{
+    display:inline-block;
+    visibility: hidden;
+    width: 0;
+    overflow: hidden;
+}

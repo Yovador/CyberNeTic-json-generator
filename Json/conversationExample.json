@@ -1,4 +1,5 @@
 {
+    "version":0.1,
     "Parameters" : {
         "id" : "chapitre1",
         "startingBranch": "C1Start",

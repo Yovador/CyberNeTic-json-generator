@@ -18,4 +18,4 @@ const ExportJson = (obj, fileName) => {
     dlAnchorElem.addEventListener('click',function() {ExportFile(obj)} )
 }
 
-export {ExportJson}
+export default ExportJson

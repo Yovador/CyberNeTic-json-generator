@@ -1,7 +1,8 @@
 
-const InitConversation = () =>{
+const InitConversation = (currentVersion) =>{
     
     let conversation = {
+        version:currentVersion,
         Parameters: {
             id: "",
             startingBranch:"",

@@ -5,19 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Générateur de groupes de personnage</title>
+    <title>Générateur de groupe de personnages</title>
     <script type="module" src = "./js/characterSetGen.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
     <link href="./styles.css" rel="stylesheet">
 
 </head>
 <body>
-    <div class="global">
+    <header>
+        <a href="./index.html" ><button class="btn btn-secondary btn-sm">Générateur de conversation</button></a>
+        <div id="generatorVersion"></div>
+    </header>
+    <div id="global" class="global">
         <div class="mainParam">
             <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-secondary btn-sm">DOWNLOAD</button> </a>
+            <button id = "addCharacter" class="btn  btn-secondary btn-sm">Ajouter un personnage</button>
+            <label for="exampleFormControlFile1">Importer une conversation :</label>
+            <input type="file" id="jsonFile" class="form-control-file">
         </div>
         <div class="panzoom-container">
             <div class="branches" id="panzoom">
+                <div class="characterList">
+                </div>
             </div>
         </div>
     </div>

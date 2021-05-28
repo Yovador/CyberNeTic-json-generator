@@ -1,7 +1,11 @@
 import { Content, Message, BranchingPoint, Branch} from "./class.js"
 import { InitConversation } from "./conversation.js"
-import { ExportJson } from "./exportJson.js"
+import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
+import CreateNewDiv from "./CreateNewDiv.js"
+
+const generatorVersion = 0.1
+document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
 const defaultMessage = { side: true, content: { type: "text", data: "" }, sendtime: 1 }
 const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { side: false, content: { type: "text", data: "" }, sendtime: 1 } }
@@ -186,17 +190,7 @@ const GenerateTree = (branches) => {
 
 }
 
-//Fonction créant une nouvelle div
-const CreateNewDiv = (content, parent, id, classStyle, getDiv, customStyle) => {
-    console.log(content, parent, id, classStyle, getDiv, customStyle)
-    const div = document.createElement('div');
-    if (classStyle != null) { div.className = classStyle }
-    if (id != null) { div.id = id }
-    if (customStyle != null) { div.style = customStyle }
-    if (content != null) {div.innerHTML = content}
-    if (parent != null) { parent.appendChild(div) } else { document.body.appendChild(div) }
-    if (getDiv) { return div }
-}
+
 
 //Génère un string contenant le html d'un message
 const ShowAMessage = (message, remove) => {
@@ -507,7 +501,7 @@ const BranchToHtml = (branch) => {
 const RetrieveData = () => {
     //Création d'un nouvelle élément conversation
 
-    let conversation = InitConversation()
+    let conversation = InitConversation(generatorVersion)
 
     //Récupération des informations de la conversation, son id, son medium, 
     //le personnage joueur et non joueur, et la conversation suivante
@@ -1044,8 +1038,6 @@ const UpdateConversation = () => {
     //Nous récupérons depuis le HTML l'état des branches actuelles
     let currentConv = RetrieveData()
 
-
-
     //Mise à jour des différents éléments de l'arbre
     Refresh(currentConv)
 
@@ -1058,8 +1050,6 @@ const GetAllBranchesHTML = () => {
     });
 }
 
-
-
 const LoadFromFile = () =>{
     let currentConv
     var file = document.getElementById("jsonFile").files[0];
@@ -1069,7 +1059,9 @@ const LoadFromFile = () =>{
         reader.onload = function (evt) {
             console.log(evt.target.result)
             currentConv = JSON.parse(evt.target.result)
-            Refresh(currentConv)
+            if(currentConv.version == generatorVersion){
+                Refresh(currentConv)
+            }
             document.getElementById("jsonFile").value = null
         }
         reader.onerror = function (evt) {
@@ -1087,8 +1079,10 @@ let conversation
 
 var cachedConversation = localStorage['conversation'];
 if(cachedConversation != null){
-    conversation = JSON.parse(cachedConversation)
-    Refresh(conversation)
+    cachedConversation = JSON.parse(cachedConversation)
+    if(cachedConversation.version == generatorVersion){
+        Refresh(cachedConversation)
+    }
 }
 
 document.getElementById("jsonFile").addEventListener("change", function(){LoadFromFile()})
