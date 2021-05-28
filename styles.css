@@ -45,11 +45,11 @@
 
 }
 .unused{
-    background-color: rgba(230, 170, 114);
+    background-color: rgba(154, 213, 202);
 }
 .branch{
     margin: 1rem;
-    background-color: rgba(239, 181, 163, 1);
+    background-color: rgba(154, 213, 202);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -61,7 +61,7 @@
 .branches-container{
     height: 100%;
     overflow: hidden;
-    background-color: rgba(255, 231, 208, 1);
+    background-color: rgba(133, 176, 184);
 
 }
 
