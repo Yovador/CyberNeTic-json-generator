@@ -81,9 +81,10 @@
 
 .shadow{
     filter: drop-shadow(4px 8px 10px #0B334C);
-    margin: 2em;
+    
 }
 
 .PadCard{
     padding: 1em;
+    margin: 2em;
 }
