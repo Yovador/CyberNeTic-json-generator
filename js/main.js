@@ -990,7 +990,7 @@ const Refresh = (currentConv) => {
 
 
     //Nous mettons à jour le lien de téléchargement
-    ExportJson(conversation)
+    ExportJson(conversation, conversation.Parameters.id)
 
     const addButtons = document.querySelectorAll(".addMessage")
     addButtons.forEach(button => {
