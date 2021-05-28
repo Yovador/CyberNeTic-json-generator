@@ -58,7 +58,7 @@
 
 
 /* Fond */
-.panzoom{
+.branches-container{
     height: 100%;
     overflow: hidden;
     background-color: rgba(133, 176, 184);
@@ -77,15 +77,4 @@
 
 .branchingPoss{
     background-color: rgba(92, 164, 169, 1);
-    margin: 2em;
 }
-
-.shadow{
-    filter:drop-shadow(2px 4px 10px #0B334C);
-}
-
-.PadCard{
-    padding: 1em;
-}
-
-
