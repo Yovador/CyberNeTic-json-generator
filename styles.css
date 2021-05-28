@@ -45,7 +45,7 @@
 
 }
 .unused{
-    background-color: rgba(154, 213, 202);
+    background-color: rgb(154, 194, 213);
 }
 .branch{
     margin: 1rem;
@@ -77,4 +77,13 @@
 
 .branchingPoss{
     background-color: rgba(92, 164, 169, 1);
+}
+
+.shadow{
+    filter: drop-shadow(4px 8px 10px #0B334C);
+    margin: 2em;
+}
+
+.PadCard{
+    padding: 1em;
 }
