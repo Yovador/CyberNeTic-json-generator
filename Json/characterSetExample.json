@@ -4,7 +4,7 @@
         {"id": "sophie", "profilePicture": "sophie.png", "firstName":"Sophie", "lastName":"Bruh" },
         {"id": "victor", "profilePicture": "victor.png", "firstName":"Victor", "lastName":"Test" }
     ],
-    "Relations":[
+    "Relationships":[
         {"me": "angélique", "them": "sophie", "confidenceMetoThem":2},
         {"me": "sophie", "them": "angélique", "confidenceMetoThem":2},
         {"me": "sophie", "them": "victor", "confidenceMetoThem":0},
