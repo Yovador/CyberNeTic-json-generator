@@ -78,7 +78,7 @@ const GenerateTree = (branches) => {
     let listOfBranch = []
 
     const CreateUnusedBranch = () => {
-        let unusedBranchDiv = CreateNewDiv("", branchesDiv, "unusedBranch", "floor unused", true, "flex-direction: column;")
+        let unusedBranchDiv = CreateNewDiv("", branchesDiv, "unusedBranch", "floor unused shadow", true, "flex-direction: column;")
 
         let html = ""
 
@@ -147,7 +147,7 @@ const GenerateTree = (branches) => {
             //On créé et attribue la div de la branch
             //BranchToHtml génère le html
             console.log(BranchToHtml(branch.branch))
-            branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch", true)
+            branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch shadow", true)
 
 
             //Pour chaque branche enfant de la branche actuelle, on relance la fonction pour créé une nouvelle branche
@@ -178,7 +178,7 @@ const GenerateTree = (branches) => {
             button.addEventListener('click', function () { DeleteUnusedBranch(parentDiv) })
 
 
-            branch.div = CreateNewDiv(BranchToHtml(branch.branch), parentDiv, null, "branch", true)
+            branch.div = CreateNewDiv(BranchToHtml(branch.branch), parentDiv, null, "branch shadow", true)
 
             parentDiv.appendChild(branch.div)
         }
