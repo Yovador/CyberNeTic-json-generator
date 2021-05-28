@@ -203,7 +203,7 @@ const ShowAMessage = (message, remove) => {
     if (remove != null) {
         mustRemove = remove
     }
-    let html = `<div class="message">`
+    let html = `<div class="message shadow card">`
     if (mustRemove) {
         html += `<button class = "deleteButton btn btn-danger btn-sm">Supprimer le message</button>`
     }
@@ -281,7 +281,7 @@ const ShowAMessage = (message, remove) => {
 const ShowOptionChoice = (poss) => {
     let html = ""
 
-    html += `<div class="branchingPoss">`
+    html += `<div class="branchingPoss shadow card PadCard">`
 
     html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
 
@@ -338,7 +338,7 @@ const ShowOptionChoice = (poss) => {
 }
 const ShowOptionTest = (poss) => {
     let html = ""
-    html += `<div class="branchingPoss">`
+    html += `<div class="branchingPoss shadow card PadCard">`
     html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
     html += `<h3> Option de Test : </h3>
     <div>
@@ -378,7 +378,7 @@ const ShowOptionTest = (poss) => {
 }
 const ShowOptionChange = (poss) => {
     let html = ""
-    html += `<div class="branchingPoss"><h3> Option de choix : </h3>
+    html += `<div class="branchingPoss shadow card PadCard"><h3> Option de choix : </h3>
         <label> Branches suivantes: </label>
         <select class="branchIDNext"> 
         `
