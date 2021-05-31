@@ -75,13 +75,13 @@ const LoadFromFile = () =>{
 
 const GenerateCharacterSet = (allCharacterHTML) =>{
     for (const characterHTML of allCharacterHTML) {
-        characterHTML.div = CreateNewDiv(GenerateCharacterHtml(characterHTML, allCharacterHTML), parentDiv, null, "characterSheet", true)
+        characterHTML.div = CreateNewDiv(GenerateCharacterHtml(characterHTML, allCharacterHTML), parentDiv, null, "characterSheet box shadow", true)
     }
 
 }
 
 const GenerateCharacterHtml = (characterHTML) =>{
-    let html = `<button class="deleteButton" >Supprimer le personnage</button>`
+    let html = `<button class="deleteButton btn btn-danger btn-sm" >Supprimer le personnage</button>`
 
 
     html += ` 

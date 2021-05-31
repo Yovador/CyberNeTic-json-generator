@@ -14,41 +14,32 @@
     
 </head>
 <body>
-    <header>
-        <a href="./characterGen.html" ><button class="btn btn-secondary btn-sm">Générateur de groupe de personnages</button></a>
-        <div id="generatorVersion"></div>
-    </header>
     <div class="global" id="global">
         <div class="card text-center">
+            <div class="mainParam mx-auto">
+                <a href="./characterGen.html" ><button class="btn btn-success btn-sm">Générateur de groupe de personnages</button></a>
+                <div id="generatorVersion" class="p-2"></div>
+            </div>
+            
             <div class="mainParam  mx-auto">
 
             
                 <div class="parameter">
-                    <!-- <label>Nom de la conversation : </label>
-                    <input id="convNameInput" type="text" ></input> -->
                     <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
                 </div>
 
                 <div class="parameter">
-                    <!-- <label>Medium : </label>
-                    <input id="mediumInput" type="text"></input> -->
                     <input class="form-control" id="mediumInput" type="text" placeholder="Medium">
                 </div>
             
                 <div class="parameter">
-                    <!-- <label>Personnage du joueur : </label>
-                    <input id="playerCharacterInput" type="text"></input> -->
                     <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
                 </div>
             
                 <div class="parameter">
-                    <!-- <label>Personnage non joueur : </label>
-                    <input id="npCharacterInput" type="text"></input> -->
                     <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
                 </div>
                 <div class="parameter">
-                    <!-- <label>conversation suivante : </label>
-                    <input id="nextConversationInput" type="text"></input> -->
                     <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
                 </div>
             </div>
@@ -56,19 +47,8 @@
               
                 <div class="mr-2">
                     <label> Exporter la conversation : </label>
-
-
-
                     <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-secondary btn-sm">DOWNLOAD</button> </a>
-
-
-
-
                 </div>
-                <!-- <div class="parameter">
-                    <label> Importer une conversation : </label>
-                    <input id="jsonFile" type="file"/>
-                </div> -->
                 <form class="btnmenu">
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Importer une conversation :</label>
@@ -76,7 +56,6 @@
                 </div>
                 </form>
                 <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre la conversation à 0</button>
-                <!-- <button id="resetButton">Mettre la conversation à 0</button> -->
 
             </div>
         </div>

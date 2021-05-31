@@ -6,9 +6,11 @@
     flex-direction: column;
     align-items: stretch;
 }
+
 .mainParam .branches-container{
     height: 100%;
 }
+
 .mainParam{
     display: flex;
     flex-direction: row;
@@ -22,6 +24,7 @@
     width: 100%;
     height: 100vh;
 }
+
 .parameter{
     margin-left: 2rem;
 }
@@ -47,6 +50,7 @@
 .unused{
     background-color: rgb(154, 194, 213);
 }
+
 .branch{
     margin: 1rem;
     background-color: rgba(154, 213, 202);
@@ -94,16 +98,18 @@
 }
 
 .characterSheet{
-    background-color:beige;
+    background-color: rgba(190, 207, 226, 1);
     margin: 2rem;
     padding: 1rem;
+    width: 15em;
 }
 
 .characterList{
     display: flex;
     flex-direction: row;
     padding:  2rem;
-    background-color: antiquewhite;
+    background-color: rgba(154, 213, 202);
+    width: auto;
 }
 
 .them{
