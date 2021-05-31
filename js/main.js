@@ -1062,6 +1062,9 @@ const LoadFromFile = () =>{
             if(currentConv.version == generatorVersion){
                 Refresh(currentConv)
             }
+            else{
+                alert("Le fichier que vous essayez de charger n'est pas à la bonne version.")
+            }
             document.getElementById("jsonFile").value = null
         }
         reader.onerror = function (evt) {
