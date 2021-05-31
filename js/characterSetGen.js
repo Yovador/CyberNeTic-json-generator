@@ -111,9 +111,9 @@ const GenerateCharacterHtml = (characterHTML) =>{
         </div>
 
 
-        <div>
+        <h2 class="mt-2">
             Relations :
-        </div>`
+        </h2>`
 
         for (const relationship of characterHTML.relationship) {
             let them = FindCharacterById(currentCharacterSet, relationship.them)
