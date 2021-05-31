@@ -172,7 +172,7 @@ const FindFreeID = (proposedID)=>{
     let i = 1
     let freeID = proposedID
     let isFree = false
-    while ( !isFree && i < 15 ){
+    while ( !isFree ){
         let exist = false
         for (const character of currentCharacterSet.Characters) {
             let id = character.id

@@ -118,3 +118,7 @@
     width: 0;
     overflow: hidden;
 }
+
+.backcolor{
+    background-color: rgba(154, 213, 202);
+}
