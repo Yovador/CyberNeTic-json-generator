@@ -74,6 +74,8 @@ const LoadFromFile = () =>{
 
 
 const GenerateCharacterSet = (allCharacterHTML) =>{
+    parentDiv.remove();
+    parentDiv = CreateNewDiv("", document.querySelector("#panzoom"), null, "characterList", true);
     for (const characterHTML of allCharacterHTML) {
         characterHTML.div = CreateNewDiv(GenerateCharacterHtml(characterHTML, allCharacterHTML), parentDiv, null, "characterSheet box shadow", true)
     }
