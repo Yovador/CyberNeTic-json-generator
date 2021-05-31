@@ -12,21 +12,40 @@
 
 </head>
 <body>
-    <header>
-        <a href="./index.html" ><button class="btn btn-secondary btn-sm">Générateur de conversation</button></a>
-        <div id="generatorVersion"></div>
-    </header>
     <div id="global" class="global">
-        <div class="mainParam">
-            <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-secondary btn-sm">DOWNLOAD</button> </a>
-            <button id = "addCharacter" class="btn  btn-secondary btn-sm">Ajouter un personnage</button>
-            <label for="exampleFormControlFile1">Importer une conversation :</label>
-            <input type="file" id="jsonFile" class="form-control-file">
-            <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre le groupe de personnage à 0</button>
+        <div class="card text-center">
+            <div class="mainParam  mx-auto">
+                <a href="./index.html" ><button class="btn btn-success btn-sm">Générateur de groupe de personnages</button></a>
+                <div id="generatorVersion" class="p-2"></div>
+            </div>
+                <div class="mainParam mx-auto">
+
+                    <div class="parameter">
+                     <label> Exporter la conversation : </label>
+                     <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-secondary btn-sm">DOWNLOAD</button> </a>
+                    </div>
+
+                    <div class="parameter">
+                        <label for="exampleFormControlFile1">Importer une conversation :</label>
+                        <input type="file" id="jsonFile" class="form-control-file">
+                    </div>
+
+                    <div class="parameter">
+                        <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre le groupe de personnage à 0</button>
+                    </div>
+                </div>
+
+                <div class="mainParam mx-auto">
+                    <div class="parameter">
+                        <button id = "addCharacter" class="btn  btn-info">Ajouter un personnage</button>
+                    </div>
+                </div>
         </div>
+
+
         <div class="panzoom-container">
             <div class="branches" id="panzoom">
-                <div class="characterList">
+                <div class="characterList shadow box">
                 </div>
             </div>
         </div>
