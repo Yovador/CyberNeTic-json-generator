@@ -4,11 +4,11 @@ import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
 import CreateNewDiv from "./CreateNewDiv.js"
 
-const generatorVersion = 0.1
+const generatorVersion = 0.2
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
-const defaultMessage = { side: true, content: { type: "text", data: "" }, sendtime: 1 }
-const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { side: false, content: { type: "text", data: "" }, sendtime: 1 } }
+const defaultMessage = { isNpc: true, content: { type: "text", data: "" }, sendtime: 1 }
+const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }, sendtime: 1 } }
 const defaultTestPoss = { branch: "", thresholds: [0, 1] }
 const defaultChangePoss = { branch: "" }
 class BranchHTML {
@@ -202,20 +202,23 @@ const ShowAMessage = (message, remove) => {
     if (mustRemove) {
         html += `<button class = "deleteButton btn btn-danger btn-sm">Supprimer le message</button>`
     }
-    html += `<h3> Message : </h3> <label> Position du message : </label>`
+    html += `<h3> Message : </h3> <label> Propriétaire du message : </label>`
     html += `
-    <select class="sideChoice">
+    <select class="isNpcChoice">
     `
-    if (message.side) {
+
+    console.log(message)
+
+    if (message.isNpc) {
         html += `
-            <option value=0 selected="selected"> Gauche </option>
-            <option value=1> Droite </option>
+            <option value=0 selected="selected"> Personnage non joueur </option>
+            <option value=1> Personnage Joueur </option>
         `
     }
     else {
         html += `
-            <option value=0> Gauche </option>
-            <option value=1 selected="selected"> Droite </option>
+            <option value=0> Personnage non joueur </option>
+            <option value=1 selected="selected"> Personnage Joueur </option>
         `
     }
 
@@ -529,10 +532,10 @@ const RetrieveData = () => {
         let messagesList = []
         let messages = div.querySelectorAll(":scope > .message")
         messages.forEach(message => {
-            let side = !Boolean(parseInt(message.querySelector(".sideChoice").value))
+            let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
             let content = new Content(message.querySelector(".contentType").value, message.querySelector(".contentData").value)
             let sendTime = parseInt(message.querySelector(".sendTime").value)
-            messagesList.push(new Message(side, content, sendTime))
+            messagesList.push(new Message(isNpc, content, sendTime))
         });
 
         return messagesList
