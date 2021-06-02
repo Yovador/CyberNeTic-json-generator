@@ -237,10 +237,7 @@ const DeleteCharacter = (charDiv) =>{
 }
 
 const RetrieveCharacterSet = () =>{
-    let newCharSet = {
-        Characters:[],
-        Relationships:[]
-    }
+    let newCharSet = EmptyCharacterSet();
 
     let allCharacterSheet = document.querySelectorAll(".characterSheet")
 
