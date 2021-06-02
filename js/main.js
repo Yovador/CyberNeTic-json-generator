@@ -222,7 +222,7 @@ const ShowAMessage = (message, remove) => {
         `
     }
 
-    html += `</select> <h4> Contenu : </h4> <label> Type de contenue : </label>`
+    html += `</select> <h4> Contenu : </h4> <label> Type de contenu : </label>`
 
     html += `
     <select class="contentType">`
@@ -259,13 +259,13 @@ const ShowAMessage = (message, remove) => {
 
     html += `
     <div>
-        <label> Contenue : </label>
+        <label> Contenu : </label>
         <textarea class = "contentData">${message.content.data}</textarea>
     </div>
 
 
     <div>
-        <label> Heure d'envoie (en seconde) : </label>
+        <label> Heure d'envoi (en seconde) : </label>
         <input type="number" class="sendTime" value = ${message.sendTime}  ></input>
     </div>
 
