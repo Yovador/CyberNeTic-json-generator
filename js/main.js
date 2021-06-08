@@ -1,4 +1,4 @@
-import { Content, Message, BranchingPoint, Branch} from "./class.js"
+import { Content, Message, BranchingPoint, Branch, HmsTime} from "./class.js"
 import { InitConversation } from "./conversation.js"
 import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
@@ -150,7 +150,6 @@ const GenerateTree = (branches) => {
 
             //On créé et attribue la div de la branch
             //BranchToHtml génère le html
-            console.log(BranchToHtml(branch.branch))
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch box shadow", true)
 
 
@@ -207,7 +206,6 @@ const ShowAMessage = (message, remove) => {
     <select class="isNpcChoice">
     `
 
-    console.log(message)
 
     if (message.isNpc) {
         html += `
@@ -257,6 +255,10 @@ const ShowAMessage = (message, remove) => {
 
     html += `</select>`
 
+    let hmsTime = new HmsTime()
+    hmsTime.SetHmsTimeFromSec(message.sendTime);
+    
+
     html += `
     <div>
         <label> Contenu : </label>
@@ -265,8 +267,14 @@ const ShowAMessage = (message, remove) => {
 
 
     <div>
-        <label> Heure d'envoi (en seconde) : </label>
-        <input type="number" class="sendTime" value = ${message.sendTime}  ></input>
+        <h6> Heure d'envoie du message : </h6>
+        <label> Heures: </label>
+        <input type="number" class="sendHours" value = ${hmsTime.hours}  ></input>
+        <label> Minutes: </label>
+        <input type="number" class="sendMinutes" value = ${hmsTime.minutes}  ></input>
+        <label> Secondes: </label>
+        <input type="number" class="sendSeconds" value = ${hmsTime.seconds}  ></input>
+
     </div>
 
     </div>
@@ -534,7 +542,20 @@ const RetrieveData = () => {
         messages.forEach(message => {
             let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
             let content = new Content(message.querySelector(".contentType").value, message.querySelector(".contentData").value)
-            let sendTime = parseInt(message.querySelector(".sendTime").value)
+
+            //Convertis le temps de Heure:Minutes:Seconds en Seconds
+            let hours = 0
+            hours += parseInt(message.querySelector(".sendHours").value)
+            let minutes = 0
+            minutes += parseInt(message.querySelector(".sendMinutes").value)
+            let seconds = 0
+            seconds = parseInt(message.querySelector(".sendSeconds").value)
+            
+            let hmsTime = new HmsTime(hours, minutes, seconds)
+            console.log("hms" , hmsTime)
+
+            let sendTime = hmsTime.GetSeconds()
+            console.log("send time :", sendTime)
             messagesList.push(new Message(isNpc, content, sendTime))
         });
 
@@ -1020,7 +1041,6 @@ const Refresh = (currentConv) => {
 }
 
 const LoadConversationInfo = () =>{
-    console.log(conversation)
     const convNameInput = document.getElementById("convNameInput");
     convNameInput.value = conversation.Parameters.id
 
@@ -1060,7 +1080,6 @@ const LoadFromFile = () =>{
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
-            console.log(evt.target.result)
             currentConv = JSON.parse(evt.target.result)
             if(currentConv.version == generatorVersion){
                 Refresh(currentConv)

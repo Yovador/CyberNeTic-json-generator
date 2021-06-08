@@ -44,5 +44,27 @@ class Relationship{
     }
 }
 
+class HmsTime{
+    constructor(hours, minutes, seconds){
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
 
-export {Content, Message, BranchingPoint, Branch, Character,Relationship}
+    GetSeconds = () =>{
+        let sec = ( (this.hours * 60) + this.minutes ) * 60 + this.seconds
+        return sec;
+    }
+
+    SetHmsTimeFromSec = (seconds) =>{
+        this.seconds = seconds % 60;
+        console.log(seconds)
+        let totalMinutes = Math.floor(seconds/60);
+        this.minutes = totalMinutes % 60;
+        this.hours = Math.floor(totalMinutes/60) % 24;
+
+    }
+}
+
+
+export {Content, Message, BranchingPoint, Branch, Character,Relationship, HmsTime}
