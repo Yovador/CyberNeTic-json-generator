@@ -9,7 +9,9 @@ const InitConversation = (currentVersion) =>{
             medium: "",
             playerCharacter: "",
             npCharacter: "",
-            nextConversation: ""
+            nextConversation: "",
+            date:"",
+            time:""
         },
     
         Branches: [

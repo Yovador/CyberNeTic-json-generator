@@ -4,7 +4,7 @@ import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
 import CreateNewDiv from "./CreateNewDiv.js"
 
-const generatorVersion = 0.2
+const generatorVersion = 0.3
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
 const defaultMessage = { isNpc: true, content: { type: "text", data: "" }}
@@ -519,6 +519,14 @@ const RetrieveData = () => {
     let nextConversation = nextConversationInput.value
     nextConversation = nextConversation.toLowerCase().replace(/\s/g, '');
 
+
+    const dateInput = document.getElementById("dateInput");
+    let date = dateInput.value
+
+    
+    const timeInput = document.getElementById("timeInput");
+    let time = timeInput.value
+
     //Fonction retournant un array de message à partir d'une div donnée
 
     const RetrieveMessage = (div) => {
@@ -636,7 +644,8 @@ const RetrieveData = () => {
     conversation.Parameters.playerCharacter = playerCharacter
     conversation.Parameters.npCharacter = npCharacter
     conversation.Parameters.nextConversation = nextConversation
-
+    conversation.Parameters.date = date
+    conversation.Parameters.time = time
     conversation.Branches = branches
 
     return conversation
@@ -1026,6 +1035,12 @@ const LoadConversationInfo = () =>{
 
     const nextConversationInput = document.getElementById("nextConversationInput");
     nextConversationInput.value = conversation.Parameters.nextConversation
+
+    const dateInput = document.getElementById("dateInput");
+    dateInput.value = conversation.Parameters.date 
+
+    const timeInput = document.getElementById("timeInput");
+    timeInput.value = conversation.Parameters.time
 }
 
 const UpdateConversation = () => {
