@@ -1,4 +1,4 @@
-import { Content, Message, BranchingPoint, Branch, HmsTime} from "./class.js"
+import { Content, Message, BranchingPoint, Branch} from "./class.js"
 import { InitConversation } from "./conversation.js"
 import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
@@ -7,8 +7,8 @@ import CreateNewDiv from "./CreateNewDiv.js"
 const generatorVersion = 0.2
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
-const defaultMessage = { isNpc: true, content: { type: "text", data: "" }, sendtime: 1 }
-const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }, sendtime: 1 } }
+const defaultMessage = { isNpc: true, content: { type: "text", data: "" }}
+const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }} }
 const defaultTestPoss = { branch: "", thresholds: [0, 1] }
 const defaultChangePoss = { branch: "" }
 class BranchHTML {
@@ -255,8 +255,6 @@ const ShowAMessage = (message, remove) => {
 
     html += `</select>`
 
-    let hmsTime = new HmsTime()
-    hmsTime.SetHmsTimeFromSec(message.sendTime);
     
 
     html += `
@@ -264,19 +262,6 @@ const ShowAMessage = (message, remove) => {
         <label> Contenu : </label>
         <textarea class = "contentData">${message.content.data}</textarea>
     </div>
-
-
-    <div>
-        <h6> Heure d'envoie du message : </h6>
-        <label> Heures: </label>
-        <input type="number" class="sendHours" value = ${hmsTime.hours}  ></input>
-        <label> Minutes: </label>
-        <input type="number" class="sendMinutes" value = ${hmsTime.minutes}  ></input>
-        <label> Secondes: </label>
-        <input type="number" class="sendSeconds" value = ${hmsTime.seconds}  ></input>
-
-    </div>
-
     </div>
     `
 
@@ -542,21 +527,7 @@ const RetrieveData = () => {
         messages.forEach(message => {
             let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
             let content = new Content(message.querySelector(".contentType").value, message.querySelector(".contentData").value)
-
-            //Convertis le temps de Heure:Minutes:Seconds en Seconds
-            let hours = 0
-            hours += parseInt(message.querySelector(".sendHours").value)
-            let minutes = 0
-            minutes += parseInt(message.querySelector(".sendMinutes").value)
-            let seconds = 0
-            seconds = parseInt(message.querySelector(".sendSeconds").value)
-            
-            let hmsTime = new HmsTime(hours, minutes, seconds)
-            console.log("hms" , hmsTime)
-
-            let sendTime = hmsTime.GetSeconds()
-            console.log("send time :", sendTime)
-            messagesList.push(new Message(isNpc, content, sendTime))
+            messagesList.push(new Message(isNpc, content))
         });
 
         return messagesList
