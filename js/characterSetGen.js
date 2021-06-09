@@ -87,12 +87,12 @@ const GenerateCharacterHtml = (characterHTML) =>{
 
 
     html += ` 
-        <div>
+        <h2>
             Personnage :
-        </div>
+        </h2>
 
         <div>
-            <label> id :</label>
+            <label> Quel personnage ? (id):</label>
             <input type="text" class="charID" value="${characterHTML.character.id}"/>
         </div>
         <div>

@@ -402,7 +402,8 @@ const ShowOptionChange = (poss) => {
 const ShowBranchingPoint = (branch) => {
     let html = ""
 
-    html += `<div class="branchingPoint PadCard"> 
+    html += `<div class="branchingPoint PadCard">
+     
         <label> Embranchement de type :  </label> 
         <select class="bpType">
     `
