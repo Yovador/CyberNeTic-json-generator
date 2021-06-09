@@ -192,7 +192,7 @@ const GenerateTree = (branches) => {
 
 
 //Génère un string contenant le html d'un message
-const ShowAMessage = (message, remove) => {
+const ShowAMessage = (message, remove, Ischoice) => {
     let mustRemove = false
     if (remove != null) {
         mustRemove = remove
@@ -201,24 +201,31 @@ const ShowAMessage = (message, remove) => {
     if (mustRemove) {
         html += `<button class = "deleteButton btn btn-danger btn-sm">Supprimer le message</button>`
     }
-    html += `<h3> Message : </h3> <label> Propriétaire du message : </label>`
-    html += `
-    <select class="isNpcChoice">
-    `
+    console.log(Ischoice)
+    if(Ischoice == false){
+                html += `<h3> Message : </h3> <label> Propriétaire du message : </label>`
+                html += `
+                <select class="isNpcChoice">
+                `
 
 
-    if (message.isNpc) {
-        html += `
-            <option value=0 selected="selected"> Personnage non joueur </option>
-            <option value=1> Personnage Joueur </option>
-        `
-    }
-    else {
-        html += `
-            <option value=0> Personnage non joueur </option>
-            <option value=1 selected="selected"> Personnage Joueur </option>
-        `
-    }
+                if (message.isNpc) {
+                    html += `
+                        <option value=0 selected="selected"> Personnage non joueur </option>
+                        <option value=1> Personnage Joueur </option>
+                    `
+                }
+                else {
+                    html += `
+                        <option value=0> Personnage non joueur </option>
+                        <option value=1 selected="selected"> Personnage Joueur </option>
+                    `
+                }
+            }
+        else {
+            html += `<select hidden class="isNpcChoice">
+                    <option hidden value=1 selected="selected"></option>`
+        }
 
     html += `</select> <h4> Contenu : </h4> <label> Type de contenu : </label>`
 
@@ -303,7 +310,7 @@ const ShowOptionChoice = (poss) => {
 
     html += `</select>`
 
-    html += ShowAMessage(poss.message)
+    html += ShowAMessage(poss.message,false,true)
     html += `<div> 
             <label> Choix Possible ? </label> 
             <input class="possible" type="checkbox" name="Possible ?"
@@ -396,9 +403,10 @@ const ShowBranchingPoint = (branch) => {
     let html = ""
 
     html += `<div class="branchingPoint PadCard">
-     
+        <div class="shadow card PadCard Embranchement">
         <label> Embranchement de type :  </label> 
         <select class="bpType">
+        
     `
 
     switch (branch.branchingPoint.type) {
@@ -408,9 +416,9 @@ const ShowBranchingPoint = (branch) => {
                     <option value="test"> Test </option>
                     <option value="change"> Change </option>
                     <option value="stop"> Stop </option>
-                    </select> 
+                    </select>
+                    </div>
                     `
-
             branch.branchingPoint.possibilities.forEach(poss => {
                 html += ShowOptionChoice(poss)
 
@@ -423,6 +431,7 @@ const ShowBranchingPoint = (branch) => {
                     <option value="change"> Change </option>
                     <option value="stop"> Stop </option>
                     </select> 
+                    </div>
                     `
 
 
@@ -438,6 +447,7 @@ const ShowBranchingPoint = (branch) => {
                     <option value="change" selected="selected"> Change </option>
                     <option value="stop"> Stop </option>
                     </select> 
+                    </div>
                     `
 
 
@@ -454,12 +464,18 @@ const ShowBranchingPoint = (branch) => {
                 <option value="change"> Change </option>
                 <option value="stop"  selected="selected"> Stop </option>
                 </select> 
+                </div>
                 `
+
             break;
     }
 
-    if (branch.branchingPoint.type == "choice" || branch.branchingPoint.type == "test") {
-        html += `<button class="addPossibilities btn btn-info btn-sm"> Ajouter une autre options </button>`
+    if (branch.branchingPoint.type == "choice") {
+        html += `<button class="addPossibilities btn btn-info btn-lg Ajouteroptions"> Ajouter une autre options </button>`
+    }
+
+    if (branch.branchingPoint.type == "test") {
+        html += `<button class="addPossibilities btn btn-info btn-lg Ajoutertest"> Ajouter une autre options </button>`
     }
 
     html += `</div>`
@@ -472,6 +488,8 @@ const ShowBranchingPoint = (branch) => {
 const BranchToHtml = (branch) => {
 
 
+
+
     let html = `<h2 class="branchName"> Branch : ${branch.id} </h2>`
 
     //Bouton d'ajout de message
@@ -479,7 +497,7 @@ const BranchToHtml = (branch) => {
 
     //Pour chaque message dans la branche, on affiche un message
     branch.messagesList.forEach(message => {
-        html += ShowAMessage(message, true)
+        html += ShowAMessage(message, true, false)
 
         //Bouton d'ajout de message
         html += `<button class="addMessage btn btn-info btn-sm"> Ajouter un message ici </button>`
@@ -658,7 +676,7 @@ const AddAMessageToBranch = (buttonDiv) => {
     let tempDiv = document.createElement('div');
     parent.replaceChild(tempDiv, buttonDiv);
     tempDiv.appendChild(buttonDiv);
-    tempDiv.innerHTML = ShowAMessage(defaultMessage, true)
+    tempDiv.innerHTML = ShowAMessage(defaultMessage, true, false)
     let messageDiv = tempDiv.querySelector(".message")
     parent.replaceChild(messageDiv, tempDiv)
     messageDiv.before(buttonDiv)
