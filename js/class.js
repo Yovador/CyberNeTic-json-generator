@@ -5,10 +5,9 @@ class Content {
     }
 }
 class Message {
-    constructor(isNpc, content, sendTime){
+    constructor(isNpc, content){
         this.isNpc = isNpc
         this.content = content
-        this.sendTime = sendTime
     }
 }
 

@@ -4,11 +4,11 @@ import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
 import CreateNewDiv from "./CreateNewDiv.js"
 
-const generatorVersion = 0.2
+const generatorVersion = 0.3
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
-const defaultMessage = { isNpc: true, content: { type: "text", data: "" }, sendtime: 1 }
-const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }, sendtime: 1 } }
+const defaultMessage = { isNpc: true, content: { type: "text", data: "" }}
+const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }} }
 const defaultTestPoss = { branch: "", thresholds: [0, 1] }
 const defaultChangePoss = { branch: "" }
 class BranchHTML {
@@ -150,7 +150,6 @@ const GenerateTree = (branches) => {
 
             //On créé et attribue la div de la branch
             //BranchToHtml génère le html
-            console.log(BranchToHtml(branch.branch))
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch box shadow", true)
 
 
@@ -207,7 +206,6 @@ const ShowAMessage = (message, remove) => {
     <select class="isNpcChoice">
     `
 
-    console.log(message)
 
     if (message.isNpc) {
         html += `
@@ -257,18 +255,13 @@ const ShowAMessage = (message, remove) => {
 
     html += `</select>`
 
+    
+
     html += `
     <div>
         <label> Contenu : </label>
         <textarea class = "contentData">${message.content.data}</textarea>
     </div>
-
-
-    <div>
-        <label> Heure d'envoi (en seconde) : </label>
-        <input type="number" class="sendTime" value = ${message.sendTime}  ></input>
-    </div>
-
     </div>
     `
 
@@ -527,6 +520,14 @@ const RetrieveData = () => {
     let nextConversation = nextConversationInput.value
     nextConversation = nextConversation.toLowerCase().replace(/\s/g, '');
 
+
+    const dateInput = document.getElementById("dateInput");
+    let date = dateInput.value
+
+    
+    const timeInput = document.getElementById("timeInput");
+    let time = timeInput.value
+
     //Fonction retournant un array de message à partir d'une div donnée
 
     const RetrieveMessage = (div) => {
@@ -535,8 +536,7 @@ const RetrieveData = () => {
         messages.forEach(message => {
             let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
             let content = new Content(message.querySelector(".contentType").value, message.querySelector(".contentData").value)
-            let sendTime = parseInt(message.querySelector(".sendTime").value)
-            messagesList.push(new Message(isNpc, content, sendTime))
+            messagesList.push(new Message(isNpc, content))
         });
 
         return messagesList
@@ -645,7 +645,8 @@ const RetrieveData = () => {
     conversation.Parameters.playerCharacter = playerCharacter
     conversation.Parameters.npCharacter = npCharacter
     conversation.Parameters.nextConversation = nextConversation
-
+    conversation.Parameters.date = date
+    conversation.Parameters.time = time
     conversation.Branches = branches
 
     return conversation
@@ -1021,7 +1022,6 @@ const Refresh = (currentConv) => {
 }
 
 const LoadConversationInfo = () =>{
-    console.log(conversation)
     const convNameInput = document.getElementById("convNameInput");
     convNameInput.value = conversation.Parameters.id
 
@@ -1036,6 +1036,12 @@ const LoadConversationInfo = () =>{
 
     const nextConversationInput = document.getElementById("nextConversationInput");
     nextConversationInput.value = conversation.Parameters.nextConversation
+
+    const dateInput = document.getElementById("dateInput");
+    dateInput.value = conversation.Parameters.date 
+
+    const timeInput = document.getElementById("timeInput");
+    timeInput.value = conversation.Parameters.time
 }
 
 const UpdateConversation = () => {
@@ -1061,7 +1067,6 @@ const LoadFromFile = () =>{
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
         reader.onload = function (evt) {
-            console.log(evt.target.result)
             currentConv = JSON.parse(evt.target.result)
             if(currentConv.version == generatorVersion){
                 Refresh(currentConv)
