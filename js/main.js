@@ -1,5 +1,12 @@
-import { Content, Message, BranchingPoint, Branch} from "./class.js"
-import { InitConversation } from "./conversation.js"
+import {
+    Content,
+    Message,
+    BranchingPoint,
+    Branch
+} from "./class.js"
+import {
+    InitConversation
+} from "./conversation.js"
 import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
 import CreateNewDiv from "./CreateNewDiv.js"
@@ -7,17 +14,39 @@ import CreateNewDiv from "./CreateNewDiv.js"
 const generatorVersion = 0.3
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
-const defaultMessage = { isNpc: true, content: { type: "text", data: "" }}
-const defaultChoicePoss = { branch: "", possible: true, confidenceMod: 0, message: { isNpc: false, content: { type: "text", data: "" }} }
-const defaultTestPoss = { branch: "", thresholds: [0, 1] }
-const defaultChangePoss = { branch: "" }
+const defaultMessage = {
+    isNpc: true,
+    content: {
+        type: "text",
+        data: ""
+    }
+}
+const defaultChoicePoss = {
+    branch: "",
+    possible: true,
+    confidenceMod: 0,
+    message: {
+        isNpc: false,
+        content: {
+            type: "text",
+            data: ""
+        }
+    }
+}
+const defaultTestPoss = {
+    branch: "",
+    thresholds: [0, 1]
+}
+const defaultChangePoss = {
+    branch: ""
+}
 class BranchHTML {
     constructor(branch) {
         this.branch = branch,
-        this.parent = this.GetParent(),
-        this.child = this.GetChild(),
-        this.div,
-        this.childsDiv
+            this.parent = this.GetParent(),
+            this.child = this.GetChild(),
+            this.div,
+            this.childsDiv
     }
 
     GetChild() {
@@ -94,7 +123,9 @@ const GenerateTree = (branches) => {
 
         let button = unusedBranchDiv.querySelector(".addUnusedBranch")
 
-        button.addEventListener('click', function () { CreateNewBranch() })
+        button.addEventListener('click', function() {
+            CreateNewBranch()
+        })
 
         return unusedBranchDiv
 
@@ -111,11 +142,11 @@ const GenerateTree = (branches) => {
 
             //variable contenant la div parent de la branch
             let finalParentDiv
-            //récupération de la BranchHTML de la branche précédant la branche actuelle
+                //récupération de la BranchHTML de la branche précédant la branche actuelle
             let parentBranch = BranchHTML.FindBranchById(branch.parent[0])
             if (branch.parent.length > 1) {
                 let i = 0
-                //Si la branch à plusieurs branche précédente, alors on cherche celle qui dispose d'une div
+                    //Si la branch à plusieurs branche précédente, alors on cherche celle qui dispose d'une div
                 while (parentBranch.div == undefined) {
                     parentBranch = BranchHTML.FindBranchById(branch.parent[i])
                     i++
@@ -178,7 +209,9 @@ const GenerateTree = (branches) => {
             let parentDiv = CreateNewDiv(parentHTML, unusedBranchDiv, null, null, true)
 
             let button = parentDiv.querySelector(".removeBranch")
-            button.addEventListener('click', function () { DeleteUnusedBranch(parentDiv) })
+            button.addEventListener('click', function() {
+                DeleteUnusedBranch(parentDiv)
+            })
 
 
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), parentDiv, null, "branch box shadow", true)
@@ -201,31 +234,28 @@ const ShowAMessage = (message, remove, Ischoice) => {
     if (mustRemove) {
         html += `<button class = "deleteButton btn btn-danger btn-sm">Supprimer le message</button>`
     }
-    console.log(Ischoice)
-    if(Ischoice == false){
-                html += `<h3> Message : </h3> <label> Propriétaire du message : </label>`
-                html += `
+    if (Ischoice == false) {
+        html += `<h3> Message : </h3> <label> Propriétaire du message : </label>`
+        html += `
                 <select class="isNpcChoice">
                 `
 
 
-                if (message.isNpc) {
-                    html += `
+        if (message.isNpc) {
+            html += `
                         <option value=0 selected="selected"> Personnage non joueur </option>
                         <option value=1> Personnage Joueur </option>
                     `
-                }
-                else {
-                    html += `
+        } else {
+            html += `
                         <option value=0> Personnage non joueur </option>
                         <option value=1 selected="selected"> Personnage Joueur </option>
                     `
-                }
-            }
-        else {
-            html += `<select hidden class="isNpcChoice">
-                    <option hidden value=1 selected="selected"></option>`
         }
+    } else {
+        html += `<select hidden class="isNpcChoice">
+                    <option hidden value=1 selected="selected"></option>`
+    }
 
     html += `</select> <h4> Contenu : </h4> <label> Type de contenu : </label>`
 
@@ -262,7 +292,7 @@ const ShowAMessage = (message, remove, Ischoice) => {
 
     html += `</select>`
 
-    
+
 
     html += `
     <div>
@@ -291,7 +321,7 @@ const ShowOptionChoice = (poss) => {
 
     if (poss.possible) {
         allBranches.forEach(branchFromAll => {
-            if(allBranches.indexOf(branchFromAll) !=0){
+            if (allBranches.indexOf(branchFromAll) != 0) {
                 switch (branchFromAll.id) {
                     case poss.branch:
                         html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
@@ -301,16 +331,15 @@ const ShowOptionChoice = (poss) => {
                         break;
                 }
             }
-            });
+        });
 
-    }
-    else {
+    } else {
         html += `<option value="none"> Pas de branche </option>`
     }
 
     html += `</select>`
 
-    html += ShowAMessage(poss.message,false,true)
+    html += ShowAMessage(poss.message, false, true)
     html += `<div> 
             <label> Choix Possible ? </label> 
             <input class="possible" type="checkbox" name="Possible ?"
@@ -318,8 +347,7 @@ const ShowOptionChoice = (poss) => {
 
     if (poss.possible) {
         html += `checked> </div>`
-    }
-    else {
+    } else {
         html += `> </div> `
     }
 
@@ -352,7 +380,7 @@ const ShowOptionTest = (poss) => {
         <select class="branchIDNext"> 
     `
     allBranches.forEach(branchFromAll => {
-        if(allBranches.indexOf(branchFromAll) !=0){        
+        if (allBranches.indexOf(branchFromAll) != 0) {
             switch (branchFromAll.id) {
                 case poss.branch:
                     html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
@@ -362,7 +390,7 @@ const ShowOptionTest = (poss) => {
                     break;
             }
         }
-        });
+    });
 
 
 
@@ -381,7 +409,7 @@ const ShowOptionChange = (poss) => {
         <select class="branchIDNext"> 
         `
     allBranches.forEach(branchFromAll => {
-        if(allBranches.indexOf(branchFromAll) !=0){
+        if (allBranches.indexOf(branchFromAll) != 0) {
 
             switch (branchFromAll.id) {
                 case poss.branch:
@@ -408,7 +436,7 @@ const ShowBranchingPoint = (branch) => {
         <select class="bpType">
         
     `
-
+    console.log(branch.branchingPoint.type);
     switch (branch.branchingPoint.type) {
         case "choice":
             html += `
@@ -542,7 +570,7 @@ const RetrieveData = () => {
     const dateInput = document.getElementById("dateInput");
     let date = dateInput.value
 
-    
+
     const timeInput = document.getElementById("timeInput");
     let time = timeInput.value
 
@@ -579,7 +607,7 @@ const RetrieveData = () => {
         if (indexChildrenBranch != null && indexChildrenBranch != undefined) {
             id = idList[indexChildrenBranch]
         }
-        if(id == undefined){
+        if (id == undefined) {
             id = ""
         }
 
@@ -614,7 +642,7 @@ const RetrieveData = () => {
                     //On récupère le bolléen indiquant si le choix est possible
                     let possible = poss.querySelector(".possible").checked
 
-                    
+
                     //On récupère le modificateur de confiance
                     let confidenceMod = poss.querySelector(".confidenceMod").value
 
@@ -622,19 +650,27 @@ const RetrieveData = () => {
                     let message = RetrieveMessage(poss)[0]
 
                     //On rajoute tout ces éléments dans l'array contenant toute les possibilités du branchingPoint de la branch
-                    branchingPossibilites.push({ branch: id, possible: possible, confidenceMod: confidenceMod, message: message })
+                    branchingPossibilites.push({
+                        branch: id,
+                        possible: possible,
+                        confidenceMod: confidenceMod,
+                        message: message
+                    })
                 });
                 break;
-            //Dans le cas d'un branchingPoint de type "test", 
-            //Il nous faut : l'id de la branch suivante, la valeur maximal et minimal
-            //de l'intervalle de validité de la possibilité
+                //Dans le cas d'un branchingPoint de type "test", 
+                //Il nous faut : l'id de la branch suivante, la valeur maximal et minimal
+                //de l'intervalle de validité de la possibilité
             case "test":
                 branchingPossDiv = branchingPointDiv.querySelectorAll(".branchingPoss")
                 branchingPossDiv.forEach(poss => {
                     let id = GetNextBranchID(poss)
                     let thresholdMin = poss.querySelector(".thresholdMin").value
                     let thresholdMax = poss.querySelector(".thresholdMax").value
-                    branchingPossibilites.push({ branch: id, thresholds: [thresholdMin, thresholdMax] })
+                    branchingPossibilites.push({
+                        branch: id,
+                        thresholds: [thresholdMin, thresholdMax]
+                    })
 
 
                 });
@@ -643,7 +679,9 @@ const RetrieveData = () => {
                 branchingPossDiv = branchingPointDiv.querySelectorAll(".branchingPoss")
                 branchingPossDiv.forEach(poss => {
                     let id = GetNextBranchID(poss)
-                    branchingPossibilites.push({ branch: id })
+                    branchingPossibilites.push({
+                        branch: id
+                    })
                 })
 
 
@@ -871,7 +909,7 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 
         const AddToNewChild = (parentBranch) => {
             parentBranch.branchingPoint.possibilities.forEach(poss => {
-                if(poss.branch != ""){
+                if (poss.branch != "") {
                     let allID = []
                     for (const branch of allBranches) {
                         allID.push(branch.id)
@@ -882,11 +920,10 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
                                 newChildBranch.push(branch)
                                 console.log(newChildBranch)
                                 AddToNewChild(branch)
-    
+
                             }
                         }
-                    }
-                    else {
+                    } else {
                         newChildBranch.push(new Branch(poss.branch, [], new BranchingPoint("stop", [])))
                     }
                 }
@@ -907,7 +944,7 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 
         const AddToNewChild = (parentBranch) => {
             for (const poss of parentBranch.branchingPoint.possibilities) {
-                if(poss.branch != ""){
+                if (poss.branch != "") {
                     for (const branch of allBranches) {
                         if (poss.branch == branch.id && !newChildBranch.includes(branch)) {
                             newChildBranch.push(branch)
@@ -928,11 +965,9 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 
     if (replace == "override" || replace == null) {
         OverridePreviousBranch()
-    }
-    else if (replace == "add") {
+    } else if (replace == "add") {
         AddNewPoss()
-    }
-    else if (replace == "remove") {
+    } else if (replace == "remove") {
         RemovePoss()
     }
 
@@ -958,7 +993,7 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 const ChangeBranching = (branchingDiv) => {
     //On récupère le branchHTML de la branche que l'on va modifier
     let oldBranch = BranchHTML.FindBranchByDiv(branchingDiv.parentNode).branch
-    //On récupère le type actuellement affiché sur le HTML
+        //On récupère le type actuellement affiché sur le HTML
     let branchingType = branchingDiv.querySelector(".bpType").value
 
 
@@ -972,17 +1007,17 @@ const ChangeBranching = (branchingDiv) => {
 
 }
 
-const ResetConversation = () =>{
+const ResetConversation = () => {
     conversation = {
-        Parameters : {
+        Parameters: {
             id: "",
             startingBranch: "",
             medium: "",
             playerCharacter: "",
             npCharacter: "",
-            nextConversation : ""
+            nextConversation: ""
         },
-        Branches:[new Branch("-0", [], new BranchingPoint("stop", []))]
+        Branches: [new Branch("-0", [], new BranchingPoint("stop", []))]
     }
     Refresh(conversation)
 }
@@ -1004,7 +1039,7 @@ const Refresh = (currentConv) => {
 
     LoadConversationInfo()
 
-    localStorage['conversation'] = JSON.stringify(conversation); 
+    localStorage['conversation'] = JSON.stringify(conversation);
 
 
     //Nous mettons à jour le lien de téléchargement
@@ -1012,25 +1047,35 @@ const Refresh = (currentConv) => {
 
     const addButtons = document.querySelectorAll(".addMessage")
     addButtons.forEach(button => {
-        button.addEventListener('click', function () { AddAMessageToBranch(button) })
+        button.addEventListener('click', function() {
+            AddAMessageToBranch(button)
+        })
     });
     const deleteButtons = document.querySelectorAll(".deleteButton")
     deleteButtons.forEach(button => {
-        button.addEventListener('click', function () { RemoveADiv(button.parentNode) })
+        button.addEventListener('click', function() {
+            RemoveADiv(button.parentNode)
+        })
     });
 
     const branchingPoints = document.querySelectorAll(".branchingPoint")
     branchingPoints.forEach(branchingPoint => {
-        branchingPoint.addEventListener('change', function () { ChangeBranching(branchingPoint) })
+        branchingPoint.addEventListener('change', function() {
+            ChangeBranching(branchingPoint)
+        })
         const deletePossS = branchingPoint.querySelectorAll(".deletePoss")
         if (deletePossS != null) {
             deletePossS.forEach(deletePoss => {
-                deletePoss.addEventListener('click', function () { RemovePoss(deletePoss.parentNode.parentNode.parentNode, -1, deletePoss.parentNode) })
+                deletePoss.addEventListener('click', function() {
+                    RemovePoss(deletePoss.parentNode.parentNode.parentNode, -1, deletePoss.parentNode)
+                })
             });
         }
         const addPoss = branchingPoint.querySelector(".addPossibilities")
         if (addPoss != null) {
-            addPoss.addEventListener('click', function () { AddNewPoss(addPoss.parentNode.parentNode, +1) })
+            addPoss.addEventListener('click', function() {
+                AddNewPoss(addPoss.parentNode.parentNode, +1)
+            })
         }
 
     });
@@ -1039,7 +1084,7 @@ const Refresh = (currentConv) => {
 
 }
 
-const LoadConversationInfo = () =>{
+const LoadConversationInfo = () => {
     const convNameInput = document.getElementById("convNameInput");
     convNameInput.value = conversation.Parameters.id
 
@@ -1056,7 +1101,7 @@ const LoadConversationInfo = () =>{
     nextConversationInput.value = conversation.Parameters.nextConversation
 
     const dateInput = document.getElementById("dateInput");
-    dateInput.value = conversation.Parameters.date 
+    dateInput.value = conversation.Parameters.date
 
     const timeInput = document.getElementById("timeInput");
     timeInput.value = conversation.Parameters.time
@@ -1078,27 +1123,26 @@ const GetAllBranchesHTML = () => {
     });
 }
 
-const LoadFromFile = () =>{
+const LoadFromFile = () => {
     let currentConv
     var file = document.getElementById("jsonFile").files[0];
     if (file) {
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
-        reader.onload = function (evt) {
+        reader.onload = function(evt) {
             currentConv = JSON.parse(evt.target.result)
-            if(currentConv.version == generatorVersion){
+            if (currentConv.version == generatorVersion) {
                 Refresh(currentConv)
-            }
-            else{
+            } else {
                 alert("Le fichier que vous essayez de charger n'est pas à la bonne version.")
             }
             document.getElementById("jsonFile").value = null
         }
-        reader.onerror = function (evt) {
+        reader.onerror = function(evt) {
             console.log("error reading file");
         }
     }
-} 
+}
 
 
 let allBranches = [new Branch("-0", [], new BranchingPoint("stop", []))]
@@ -1108,20 +1152,25 @@ let allBranchesHTML = []
 let conversation
 
 var cachedConversation = localStorage['conversation'];
-if(cachedConversation != null){
+if (cachedConversation != null) {
     cachedConversation = JSON.parse(cachedConversation)
-    if(cachedConversation.version == generatorVersion){
+    if (cachedConversation.version == generatorVersion) {
         Refresh(cachedConversation)
     }
 }
 
-document.getElementById("jsonFile").addEventListener("change", function(){LoadFromFile()})
+document.getElementById("jsonFile").addEventListener("change", function() {
+    LoadFromFile()
+})
 GetAllBranchesHTML()
 GenerateTree(allBranchesHTML)
 UpdateConversation()
 
-document.getElementById("global").addEventListener('change', function () { UpdateConversation() })
-document.getElementById("resetButton").addEventListener('click', function(){ResetConversation()})
+document.getElementById("global").addEventListener('change', function() {
+    UpdateConversation()
+})
+document.getElementById("resetButton").addEventListener('click', function() {
+    ResetConversation()
+})
 
 AddZoom(document.querySelector('#branches'))
-

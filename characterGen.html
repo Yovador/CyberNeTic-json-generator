@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Générateur de groupe de personnages</title>
-    <script type="module" src = "./js/characterSetGen.js" defer></script>
+    <script type="module" src="./js/characterSetGen.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
     <link href="./styles.css" rel="stylesheet">
 
 </head>
+
 <body>
     <div id="global" class="global">
         <div class="card text-center">
             <div class="mainParam  mx-auto">
-                <a href="./index.html" ><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
+                <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
                 <div id="generatorVersion" class="p-2"></div>
             </div>
-                <div class="mainParam mx-auto">
+            <div class="mainParam mx-auto">
 
-                    <div class="parameter">
-                     <label> Exporter le groupe de personnages : </label>
-                     <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-secondary btn-sm">DOWNLOAD</button> </a>
-                    </div>
-
-                    <div class="parameter">
-                        <label for="exampleFormControlFile1">Importer une conversation :</label>
-                        <input type="file" id="jsonFile" class="form-control-file">
-                    </div>
-
-                    <div class="parameter">
-                        <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre le groupe de personnage à 0</button>
-                    </div>
+                <div class="parameter">
+                    <label> Exporter le groupe de personnages : </label>
+                    <a id="downloadAnchorElem"> <button type="submit" class="btn btn-info btn-sm ">DOWNLOAD</button> </a>
                 </div>
 
-                <div class="mainParam mx-auto">
-                    <div class="parameter">
-                        <button id = "addCharacter" class="btn  btn-info">Ajouter un personnage</button>
-                    </div>
+                <div class="parameter">
+                    <label for="exampleFormControlFile1">Importer une conversation :</label>
+                    <input type="file" id="jsonFile" class="form-control-file">
                 </div>
+
+                <div class="parameter">
+                    <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre le groupe de personnage à 0</button>
+                </div>
+            </div>
+
+            <div class="mainParam mx-auto">
+                <div class="parameter">
+                    <button id="addCharacter" class="btn  btn-info">Ajouter un personnage</button>
+                </div>
+            </div>
         </div>
 
 
@@ -50,6 +52,7 @@
             </div>
         </div>
     </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
+
 </html>

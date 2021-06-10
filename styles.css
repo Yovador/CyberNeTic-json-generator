@@ -1,4 +1,4 @@
-.global{
+.global {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -7,17 +7,17 @@
     align-items: stretch;
 }
 
-.mainParam .branches-container{
+.mainParam .branches-container {
     height: 100%;
 }
 
-.mainParam{
+.mainParam {
     display: flex;
     flex-direction: row;
     margin: 1rem;
 }
 
-.svg{
+.svg {
     position: absolute;
     top: 0;
     left: 0;
@@ -25,33 +25,32 @@
     height: 100vh;
 }
 
-.parameter{
+.parameter {
     margin-left: 2rem;
 }
 
-.btnmenu{
+.btnmenu {
     margin: 1px 60px 1px;
 }
 
-.branches{
+.branches {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.floor{
+.floor {
     display: flex;
     flex-direction: row;
     margin: 2rem;
     padding: 1rem;
-
-
 }
-.unused{
+
+.unused {
     background-color: rgb(154, 194, 213);
 }
 
-.branch{
+.branch {
     margin: 1rem;
     background-color: rgba(154, 213, 202);
     display: flex;
@@ -62,76 +61,75 @@
 
 
 /* Fond */
-.panzoom-container{
+
+.panzoom-container {
     height: 100%;
     overflow: hidden;
     background-color: rgba(133, 176, 184);
-
 }
 
-.message{
+.message {
     margin: 2rem;
     padding: 1rem;
     background-color: rgba(190, 207, 226, 1);
 }
 
-.branchName{
+.branchName {
     width: 20rem;
 }
 
-.branchingPoss{
+.branchingPoss {
     background-color: rgba(92, 164, 169, 1);
 }
 
-.shadow{
+.shadow {
     filter: drop-shadow(4px 8px 10px #0B334C);
-    
 }
 
-.PadCard{
+.PadCard {
     padding: 1em;
     margin: 2em;
 }
 
-.box{
+.box {
     border-radius: 1em;
 }
 
-.characterSheet{
+.characterSheet {
     background-color: rgba(190, 207, 226, 1);
     margin: 2rem;
     padding: 1rem;
     width: 15em;
 }
 
-.characterList{
-    display: flex;
-    flex-direction: row;
-    padding:  2rem;
+.characterList {
+    display: -webkit-inline-box;
     /* background-color: rgba(154, 213, 202); */
-    width: auto;
 }
 
-.them{
-    display:inline-block;
+.them {
+    display: inline-block;
     visibility: hidden;
     width: 0;
     overflow: hidden;
 }
 
-.backcolor{
+.backcolor {
     background-color: rgba(154, 213, 202);
 }
 
-.Ajouteroptions{
+.Ajouteroptions {
     margin-left: 4.5em;
 }
 
-.Ajoutertest{
+.Ajoutertest {
     margin-left: 1em;
 }
 
-.Embranchement{
-     background-color: rgb(48, 216, 160);
+.Embranchement {
+    background-color: rgb(48, 216, 160);
+}
 
+.charPP {
+    width: 70%;
 }

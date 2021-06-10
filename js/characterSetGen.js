@@ -1,7 +1,10 @@
 import AddZoom from "./addZoom.js";
 import CreateNewDiv from "./CreateNewDiv.js";
 import ExportJson from "./exportJson.js"
-import {Character, Relationship} from "./class.js"
+import {
+    Character,
+    Relationship
+} from "./class.js"
 
 const generatorVersion = 0.1
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
@@ -11,13 +14,13 @@ let allCharacterHTML = []
 AddZoom(document.querySelector("#panzoom"));
 
 class CharacterHTML {
-    constructor(character){
+    constructor(character) {
         this.character = character
         this.div
         this.relationship = []
     }
 
-    static  FindCharacterHTMLByDiv = (div) =>{
+    static FindCharacterHTMLByDiv = (div) => {
         let found = null
         allCharacterHTML.forEach(characterHTML => {
             if (characterHTML.div == div) {
@@ -25,16 +28,16 @@ class CharacterHTML {
             }
         });
         return found
-    }  
+    }
 }
 
 
-const GetAllCharacterHTML = () =>{
+const GetAllCharacterHTML = () => {
     allCharacterHTML = []
     for (const character of currentCharacterSet.Characters) {
         let newCharHTML = new CharacterHTML(character)
         for (const relationship of currentCharacterSet.Relationships) {
-            if(relationship.me == character.id){
+            if (relationship.me == character.id) {
                 newCharHTML.relationship.push(relationship)
             }
         }
@@ -42,101 +45,185 @@ const GetAllCharacterHTML = () =>{
     }
 }
 
-const EmptyCharacterSet = () =>{
+const EmptyCharacterSet = () => {
     let emptyCharacterSet = {
-        version:generatorVersion,
-        Characters:[],
-        Relationships:[]
+        version: generatorVersion,
+        Characters: [],
+        Relationships: []
     }
 
     return emptyCharacterSet
 }
 
-const LoadFromFile = () =>{
+const LoadFromFile = () => {
     let charSet
     var file = document.getElementById("jsonFile").files[0];
     if (file) {
         var reader = new FileReader();
         reader.readAsText(file, "UTF-8");
-        reader.onload = function (evt) {
+        reader.onload = function(evt) {
             console.log(evt.target.result)
             charSet = JSON.parse(evt.target.result)
-            if(charSet.version == generatorVersion){
+            if (charSet.version == generatorVersion) {
                 Refresh(charSet)
             }
             document.getElementById("jsonFile").value = null
         }
-        reader.onerror = function (evt) {
+        reader.onerror = function(evt) {
             console.log("error reading file");
         }
     }
-} 
+}
 
 
-const GenerateCharacterSet = (allCharacterHTML) =>{
+const GenerateCharacterSet = (allCharacterHTML) => {
     parentDiv.remove();
     parentDiv = CreateNewDiv("", document.querySelector("#panzoom"), null, "characterList", true);
     for (const characterHTML of allCharacterHTML) {
         characterHTML.div = CreateNewDiv(GenerateCharacterHtml(characterHTML, allCharacterHTML), parentDiv, null, "characterSheet box shadow", true)
     }
 
+
 }
 
-const GenerateCharacterHtml = (characterHTML) =>{
+const GenerateCharacterHtml = (characterHTML) => {
+
+    const regExpImg = new RegExp(/^(.*?)(?=(\.))/gm)
+    const regExpExt = new RegExp(/(?<=(\.))(.*?)$/gm)
+    let stringImg = characterHTML.character.profilePicture.match(regExpImg)
+    let stringExt = characterHTML.character.profilePicture.match(regExpExt)
+    console.log(stringImg)
+    console.log(stringExt)
+
+    if (stringImg == null || stringImg == undefined || stringImg.length == 0) {
+        stringImg = ""
+    } else {
+        stringImg = stringImg[0]
+    }
+
+    if (stringExt == null || stringExt == undefined || stringExt.length == 0) {
+        stringExt = "png"
+    } else {
+        stringExt = stringExt[0]
+    }
+
     let html = `<button class="deleteButton btn btn-danger btn-sm" >Supprimer le personnage</button>`
 
 
     html += ` 
-        <h2>
-            Personnage :
-        </h2>
+    <h2>
+        Personnage :
+    </h2>
 
-        <div>
-            <label> Quel personnage ? (id):</label>
-            <input type="text" class="charID" value="${characterHTML.character.id}"/>
+    <div>
+        <label> Quel personnage ? (id):</label>
+        <input type="text" class="charID" value="${characterHTML.character.id}"/>
+    </div>
+    <div>
+
+        <label> nom de l'image de profil : </label>
+        <div class="input-group mb-3">
+            <input type="text" class="charPP" value="${stringImg}"/>
+            <div class="input-group-append">
+            <select class="bpExtension">`
+    if (stringExt != null) {
+        switch (stringExt) {
+            case "png":
+                html += `
+                        <option value="png" selected="selected"> .png </option>
+                        <option value="jpg" > .jpg </option>
+                        <option value="jpeg" > .jpeg </option>
+                        </select>
+                        </div>
+                        `
+
+                break;
+
+            case "jpg":
+
+                html += `
+                            <option value="png" > .png </option>
+                            <option value="jpg" selected="selected"> .jpg </option>
+                            <option value="jpeg"> .jpeg </option>
+                            </select>
+                            </div>
+                            `
+
+
+                break;
+
+            case "jpeg":
+                html += `
+                            <option value="png" > .png </option>
+                            <option value="jpg" > .jpg </option>
+                            <option value="jpeg" selected="selected"> .jpeg </option>
+                            </select>
+                            </div>
+                            `
+
+
+                break;
+            default:
+                html += `
+            <option value="png" > .png </option>
+            <option value="jpg" > .jpg </option>
+            <option value="jpeg"> .jpeg </option>
+            </select>
+            </div>
+            `
+
+        }
+    } else {
+        html += `
+        <option value="png" > .png </option>
+        <option value="jpg" > .jpg </option>
+        <option value="jpeg"> .jpeg </option>
+        </select>
         </div>
-        <div>
-            <label> nom de l'image de profil : </label>
-            <input type="text" class="charPP" value="${characterHTML.character.profilePicture}"/>
-        </div>
+        `
+    }
 
-        <div>
-            <label> Prénom : </label>
-            <input type="text" class="charFN" value="${characterHTML.character.firstName}"/>
-        </div>
+    html += ` 
 
-        <div>
-            <label> Nom de famille : </label>
-            <input type="text" class="charLN" value="${characterHTML.character.lastName}"/>
-        </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label> Prénom : </label>
+                        <input type="text" class="charFN" value="${characterHTML.character.firstName}"/>
+                    </div>
+
+                    <div>
+                        <label> Nom de famille : </label>
+                        <input type="text" class="charLN" value="${characterHTML.character.lastName}"/>
+                    </div>
+
+                    <h2 class="mt-2">
+                        Relations :
+                    </h2>`
 
 
-        <h2 class="mt-2">
-            Relations :
-        </h2>`
-
-        for (const relationship of characterHTML.relationship) {
-            let them = FindCharacterById(currentCharacterSet, relationship.them)
-            html += `
+    for (const relationship of characterHTML.relationship) {
+        let them = FindCharacterById(currentCharacterSet, relationship.them)
+        html += `
 
                 <div class = "relationship" >
                     <label>${them.firstName} ${them.lastName}</label> <span class = "them">${them.id}</span>
                     <input type="number" class="confidence" value="${relationship.confidenceMeToThem}"/>
                 </div>
-            
             `
-        }
-
+    }
 
     return html
-    
+
+
 }
 
-const FindCharacterById = (characterSet, id) =>{
+const FindCharacterById = (characterSet, id) => {
     let characterFound
 
     for (const character of characterSet.Characters) {
-        if(character.id == id){
+        if (character.id == id) {
             characterFound = character
         }
     }
@@ -145,21 +232,21 @@ const FindCharacterById = (characterSet, id) =>{
 
 }
 
-const OnIdChange = (idDiv) =>{
+const OnIdChange = (idDiv) => {
     let characterHTML = CharacterHTML.FindCharacterHTMLByDiv(idDiv.parentNode.parentNode)
     let newID = FindFreeID(idDiv.value)
     let oldID = characterHTML.character.id
     for (const character of currentCharacterSet.Characters) {
-        if(character.id == oldID){
-            character.id = newID 
+        if (character.id == oldID) {
+            character.id = newID
         }
     }
 
     for (const relationship of currentCharacterSet.Relationships) {
-        if(relationship.me == oldID){
+        if (relationship.me == oldID) {
             relationship.me = newID
         }
-        if(relationship.them == oldID){
+        if (relationship.them == oldID) {
             relationship.them = newID
         }
     }
@@ -168,22 +255,22 @@ const OnIdChange = (idDiv) =>{
 
 
 }
-const FindFreeID = (proposedID)=>{
+const FindFreeID = (proposedID) => {
     let i = 1
     let freeID = proposedID
     let isFree = false
-    while ( !isFree ){
+    while (!isFree) {
         let exist = false
         for (const character of currentCharacterSet.Characters) {
             let id = character.id
-            if(id === freeID){
+            if (id === freeID) {
                 freeID = proposedID + i
                 exist = true
             }
 
-            
+
         }
-        if(!exist){
+        if (!exist) {
             isFree = true
         }
 
@@ -193,7 +280,7 @@ const FindFreeID = (proposedID)=>{
 
 
 }
-const AddNewCharacter = () =>{
+const AddNewCharacter = () => {
     let id = FindFreeID("new")
     let newCharacter = new Character(id, "", `Nouveau/${id}`, "")
     let newRelationshipList = []
@@ -206,49 +293,50 @@ const AddNewCharacter = () =>{
     Refresh(currentCharacterSet)
 }
 
-const DeleteCharacter = (charDiv) =>{
+const DeleteCharacter = (charDiv) => {
     let id = charDiv.querySelector(".charID").value
     console.log(id)
 
     console.log(currentCharacterSet.Relationships, currentCharacterSet.Relationships.length)
     let relationshipToDelete = []
-    for (var i=0; i < currentCharacterSet.Relationships.length; i++) {
+    for (var i = 0; i < currentCharacterSet.Relationships.length; i++) {
         let relationship = currentCharacterSet.Relationships[i]
         console.log(relationship, i)
-        if(relationship.me == id || relationship.them == id){
+        if (relationship.me == id || relationship.them == id) {
             console.log("found")
             relationshipToDelete.push(relationship)
         }
     }
-    
+
     for (const character of currentCharacterSet.Characters) {
-        if(character.id == id){
+        if (character.id == id) {
             console.log(character)
             currentCharacterSet.Characters.splice(currentCharacterSet.Characters.indexOf(character), 1)
         }
     }
 
     for (const relationship of relationshipToDelete) {
-        
+
         currentCharacterSet.Relationships.splice(currentCharacterSet.Relationships.indexOf(relationship), 1)
     }
     console.log(currentCharacterSet)
     Refresh(currentCharacterSet)
 }
 
-const RetrieveCharacterSet = () =>{
+const RetrieveCharacterSet = () => {
     let newCharSet = EmptyCharacterSet();
 
     let allCharacterSheet = document.querySelectorAll(".characterSheet")
 
+
     for (const characterSheet of allCharacterSheet) {
-        
+
         let id = characterSheet.querySelector(".charID").value
-        let profilePicture = characterSheet.querySelector(".charPP").value
+        let profilePicture = characterSheet.querySelector(".charPP").value + "." + characterSheet.querySelector(".bpExtension").value
         let firstName = characterSheet.querySelector(".charFN").value
         let lastName = characterSheet.querySelector(".charLN").value
-        
-        
+
+
         let character = new Character(id, profilePicture, firstName, lastName)
         newCharSet.Characters.push(character)
         let allRelationships = characterSheet.querySelectorAll(".relationship")
@@ -269,29 +357,34 @@ const RetrieveCharacterSet = () =>{
 
 }
 
-const  ResetCharacters = () =>{
+const ResetCharacters = () => {
     Refresh(EmptyCharacterSet())
 }
 
-const Refresh = (newCharacterSet) =>{
+const Refresh = (newCharacterSet) => {
     parentDiv.innerHTML = ""
     currentCharacterSet = newCharacterSet
-    localStorage['currentCharacterSet'] = JSON.stringify(currentCharacterSet); 
+    localStorage['currentCharacterSet'] = JSON.stringify(currentCharacterSet);
     GetAllCharacterHTML()
     GenerateCharacterSet(allCharacterHTML)
 
     ExportJson(currentCharacterSet, "characterSet")
     let characterSheets = document.querySelectorAll(".characterSheet");
+
     for (const characterSheet of characterSheets) {
         let charID = characterSheet.querySelector(".charID")
-        charID.addEventListener('change', function () { OnIdChange(charID) })
+        charID.addEventListener('change', function() {
+            OnIdChange(charID)
+        })
         let deleteButton = characterSheet.querySelector(".deleteButton")
-        deleteButton.addEventListener('click', function () { DeleteCharacter(characterSheet) })
+        deleteButton.addEventListener('click', function() {
+            DeleteCharacter(characterSheet)
+        })
     }
 
 }
 
-const onUpdate = () =>{
+const onUpdate = () => {
     let newCharSet = RetrieveCharacterSet()
     Refresh(newCharSet)
 
@@ -299,17 +392,25 @@ const onUpdate = () =>{
 let currentCharacterSet = EmptyCharacterSet()
 
 var cachedCurrentCharacterSet = localStorage['currentCharacterSet'];
-if(cachedCurrentCharacterSet != null ){
+if (cachedCurrentCharacterSet != null) {
     cachedCurrentCharacterSet = JSON.parse(cachedCurrentCharacterSet)
     if (cachedCurrentCharacterSet.version == generatorVersion) {
-        console.log(cachedCurrentCharacterSet.version,  generatorVersion)
+        console.log(cachedCurrentCharacterSet.version, generatorVersion)
         Refresh(cachedCurrentCharacterSet)
     }
 }
 
 Refresh(currentCharacterSet)
 
-document.getElementById("global").addEventListener('change', function () { onUpdate() })
-document.getElementById("addCharacter").addEventListener('click', function () { AddNewCharacter() })
-document.getElementById("jsonFile").addEventListener("change", function(){LoadFromFile()})
-document.getElementById("resetButton").addEventListener('click', function(){ResetCharacters()})
+document.getElementById("global").addEventListener('change', function() {
+    onUpdate()
+})
+document.getElementById("addCharacter").addEventListener('click', function() {
+    AddNewCharacter()
+})
+document.getElementById("jsonFile").addEventListener("change", function() {
+    LoadFromFile()
+})
+document.getElementById("resetButton").addEventListener('click', function() {
+    ResetCharacters()
+})
