@@ -317,8 +317,8 @@ const ShowOptionChoice = (poss) => {
 
     html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
 
-    html += `    <h3> Option de choix : </h3>
-    <label> Branches suivantes: </label>
+    html += `    <h3> Relier ce choix a une branche </h3>
+    <label> Selectionné la branche relier </label>
     <select class="branchIDNext"> `
 
 
@@ -408,8 +408,8 @@ const ShowOptionTest = (poss) => {
 }
 const ShowOptionChange = (poss) => {
     let html = ""
-    html += `<div class="branchingPoss shadow card PadCard"><h3> Option de choix : </h3>
-        <label> Branches suivantes: </label>
+    html += `<div class="branchingPoss shadow card PadCard"><h3> Relier cette branche a une autre </h3>
+        <label> Selectionné la branche suivante: </label>
         <select class="branchIDNext"> 
         `
     allBranches.forEach(branchFromAll => {
@@ -436,7 +436,7 @@ const ShowBranchingPoint = (branch) => {
 
     html += `<div class="branchingPoint PadCard">
         <div class="shadow card PadCard Embranchement">
-        <label> Embranchement de type :  </label> 
+        <label> A la fin de cette branche : </label> 
         <select class="bpType">
         
     `
@@ -444,10 +444,10 @@ const ShowBranchingPoint = (branch) => {
     switch (branch.branchingPoint.type) {
         case "choice":
             html += `
-                    <option value="choice" selected="selected"> Choix </option>
-                    <option value="test"> Test </option>
-                    <option value="change"> Change </option>
-                    <option value="stop"> Stop </option>
+                    <option value="choice" selected="selected"> Crée un choix pour le joueur </option>
+                    <option value="test"> Crée un test de confiance </option>
+                    <option value="change"> Relier a une autre branche </option>
+                    <option value="stop"> Stopper la conversation</option>
                     </select>
                     </div>
                     `
@@ -458,12 +458,12 @@ const ShowBranchingPoint = (branch) => {
             break;
         case "test":
             html += `
-                    <option value="choice"> Choix </option>
-                    <option value="test" selected="selected"> Test </option>
-                    <option value="change"> Change </option>
-                    <option value="stop"> Stop </option>
-                    </select> 
-                    </div>
+            <option value="choice" > Crée un choix pour le joueur </option>
+            <option value="test" selected="selected"> Crée un test de confiance </option>
+            <option value="change"> Relier a une autre branche </option>
+            <option value="stop"> Stopper la conversation</option>
+            </select>
+            </div>
                     `
 
 
@@ -474,12 +474,12 @@ const ShowBranchingPoint = (branch) => {
             break;
         case "change":
             html += `
-                    <option value="choice"> Choix </option>
-                    <option value="test"> Test </option>
-                    <option value="change" selected="selected"> Change </option>
-                    <option value="stop"> Stop </option>
-                    </select> 
-                    </div>
+            <option value="choice" > Crée un choix pour le joueur </option>
+            <option value="test"> Crée un test de confiance </option>
+            <option value="change" selected="selected"> Relier a une autre branche </option>
+            <option value="stop"> Stopper la conversation</option>
+            </select>
+            </div>
                     `
 
 
@@ -491,12 +491,12 @@ const ShowBranchingPoint = (branch) => {
         case "stop":
             html += `
 
-                <option value="choice"> Choix </option>
-                <option value="test"> Test </option>
-                <option value="change"> Change </option>
-                <option value="stop"  selected="selected"> Stop </option>
-                </select> 
-                </div>
+            <option value="choice" > Crée un choix pour le joueur </option>
+            <option value="test"> Crée un test de confiance </option>
+            <option value="change"> Relier a une autre branche </option>
+            <option value="stop" selected="selected"> Stopper la conversation</option>
+            </select>
+            </div>
                 `
 
             break;

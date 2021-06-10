@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <title>CyberNeTicJSONMaker</title>
     <meta charset="UTF-8">
@@ -8,19 +9,21 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="./styles.css" rel="stylesheet">
-    <script type="module" src = "./js/main.js" defer></script>
+    <script type="module" src="./js/main.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
-    
-    
+
+
 </head>
+
 <body>
     <div class="global" id="global">
         <div class="card text-center">
             <div class="mainParam mx-auto">
-                <a href="./characterGen.html" ><button class="btn btn-success btn-sm">Générateur de groupe de personnages</button></a>
+                <a href="./characterGen.html"><button class="btn btn-success btn-sm">Générateur de groupe de
+                        personnages</button></a>
                 <div id="generatorVersion" class="p-2"></div>
             </div>
-            
+
             <div class="mainParam  mx-auto">
 
                 <div class="parameter">
@@ -30,11 +33,11 @@
                 <div class="parameter">
                     <input class="form-control" id="mediumInput" type="text" placeholder="Medium">
                 </div>
-            
+
                 <div class="parameter">
                     <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
                 </div>
-            
+
                 <div class="parameter">
                     <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
                 </div>
@@ -42,35 +45,40 @@
                 <div class="parameter">
                     <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
                 </div>
+
                 <div class="parameter">
-                    <input class="form-control" id="dateInput" type="date" >
+                    <input class="form-control" id="dateInput" type="date">
                 </div>
+
                 <div class="parameter">
-                    <input class="form-control" id="timeInput" type="time" >
+                    <input class="form-control" id="timeInput" type="time">
                 </div>
 
             </div>
             <div class="card-footer mainParam mx-auto">
                 <div class="mr-2">
                     <label> Exporter la conversation : </label>
-                    <a id="downloadAnchorElem"> <button type="submit"  class="btn btn-info btn-sm ">DOWNLOAD</button> </a>
+                    <a id="downloadAnchorElem"> <button type="submit" class="btn btn-info btn-sm ">DOWNLOAD</button>
+                    </a>
                 </div>
                 <form class="btnmenu">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Importer une conversation :</label>
-                    <input type="file" id="jsonFile" class="form-control-file">
-                </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Importer une conversation :</label>
+                        <input type="file" id="jsonFile" class="form-control-file">
+                    </div>
                 </form>
-                <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre la conversation à 0</button>
+                <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre la conversation à
+                    0</button>
             </div>
         </div>
 
-    
-        <div class ="panzoom-container" id="branches-container">
+
+        <div class="panzoom-container" id="branches-container">
             <div id="branches" class="branches">
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
+
 </html>
