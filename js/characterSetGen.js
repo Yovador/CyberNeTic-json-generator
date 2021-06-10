@@ -84,28 +84,30 @@ const GenerateCharacterSet = (allCharacterHTML) => {
     }
 
 
+
 }
 
 const GenerateCharacterHtml = (characterHTML) => {
-
     const regExpImg = new RegExp(/^(.*?)(?=(\.))/gm)
-    const regExpExt = new RegExp(/(?<=(\.))(.*?)$/gm)
-    let stringImg = characterHTML.character.profilePicture.match(regExpImg)
-    let stringExt = characterHTML.character.profilePicture.match(regExpExt)
-    console.log(stringImg)
-    console.log(stringExt)
-
+    let stringImg = "image"
+    stringImg = characterHTML.character.profilePicture.match(regExpImg)
     if (stringImg == null || stringImg == undefined || stringImg.length == 0) {
         stringImg = ""
     } else {
-        stringImg = stringImg[0]
+        stringImg = stringImg
     }
 
+    const regExpExt = new RegExp(/(?<=(\.))(.*?)$/gm)
+    let stringExt = characterHTML.character.profilePicture.match(regExpExt)
     if (stringExt == null || stringExt == undefined || stringExt.length == 0) {
         stringExt = "png"
     } else {
         stringExt = stringExt[0]
     }
+
+    console.log(stringImg);
+    console.log(stringExt);
+
 
     let html = `<button class="deleteButton btn btn-danger btn-sm" >Supprimer le personnage</button>`
 
@@ -122,10 +124,11 @@ const GenerateCharacterHtml = (characterHTML) => {
     <div>
 
         <label> nom de l'image de profil : </label>
-        <div class="input-group mb-3">
+        <div class="input-group tktfrere mb-3">
             <input type="text" class="charPP" value="${stringImg}"/>
             <div class="input-group-append">
             <select class="bpExtension">`
+
     if (stringExt != null) {
         switch (stringExt) {
             case "png":
@@ -330,9 +333,10 @@ const RetrieveCharacterSet = () => {
 
 
     for (const characterSheet of allCharacterSheet) {
+        let charPPnoPoint = characterSheet.querySelector(".charPP").value.replace(/\./gmi, '')
 
         let id = characterSheet.querySelector(".charID").value
-        let profilePicture = characterSheet.querySelector(".charPP").value + "." + characterSheet.querySelector(".bpExtension").value
+        let profilePicture = charPPnoPoint + "." + characterSheet.querySelector(".bpExtension").value
         let firstName = characterSheet.querySelector(".charFN").value
         let lastName = characterSheet.querySelector(".charLN").value
 
@@ -367,7 +371,6 @@ const Refresh = (newCharacterSet) => {
     localStorage['currentCharacterSet'] = JSON.stringify(currentCharacterSet);
     GetAllCharacterHTML()
     GenerateCharacterSet(allCharacterHTML)
-
     ExportJson(currentCharacterSet, "characterSet")
     let characterSheets = document.querySelectorAll(".characterSheet");
 
