@@ -239,17 +239,21 @@ const ShowAMessage = (message, remove, Ischoice) => {
         html += `
                 <select class="isNpcChoice">
                 `
+        var PropSMSPlayer = document.getElementById("playerCharacterInput").value
+        console.log(PropSMSPlayer)
+        var PropSMSNpc = document.getElementById("npCharacterInput").value
+        console.log(PropSMSNpc)
 
 
         if (message.isNpc) {
             html += `
-                        <option value=0 selected="selected"> Personnage non joueur </option>
-                        <option value=1> Personnage Joueur </option>
+                        <option value=0 selected="selected"> ${PropSMSNpc} </option>
+                        <option value=1> ${PropSMSPlayer} </option>
                     `
         } else {
             html += `
-                        <option value=0> Personnage non joueur </option>
-                        <option value=1 selected="selected"> Personnage Joueur </option>
+                        <option value=0> ${PropSMSNpc} </option>
+                        <option value=1 selected="selected"> ${PropSMSPlayer} </option>
                     `
         }
     } else {
