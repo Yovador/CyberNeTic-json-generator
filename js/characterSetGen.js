@@ -105,8 +105,6 @@ const GenerateCharacterHtml = (characterHTML) => {
         stringExt = stringExt[0]
     }
 
-    console.log(stringImg);
-    console.log(stringExt);
 
 
     let html = `<button class="deleteButton btn btn-danger btn-sm" >Supprimer le personnage</button>`
@@ -163,7 +161,6 @@ const GenerateCharacterHtml = (characterHTML) => {
                             </select>
                             </div>
                             `
-
 
                 break;
             default:

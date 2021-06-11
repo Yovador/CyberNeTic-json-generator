@@ -202,8 +202,6 @@ const GenerateTree = (branches) => {
     branches.forEach(branch => {
         if (!listOfBranch.includes(branch.branch.id)) {
 
-            console.log(unusedBranchDiv)
-
             let parentHTML = `<button class="removeBranch btn btn-danger btn-sm">Supprimer la branche</button>`
 
             let parentDiv = CreateNewDiv(parentHTML, unusedBranchDiv, null, null, true)
@@ -240,9 +238,9 @@ const ShowAMessage = (message, remove, Ischoice) => {
                 <select class="isNpcChoice">
                 `
         var PropSMSPlayer = document.getElementById("playerCharacterInput").value
-        console.log(PropSMSPlayer)
+
         var PropSMSNpc = document.getElementById("npCharacterInput").value
-        console.log(PropSMSNpc)
+
 
 
         if (message.isNpc) {
@@ -258,10 +256,13 @@ const ShowAMessage = (message, remove, Ischoice) => {
         }
     } else {
         html += `<select hidden class="isNpcChoice">
-                    <option hidden value=1 selected="selected"></option>`
+                    <option hidden value=1 selected="selected"></option>
+                    `
     }
 
     html += `</select> <h4> Contenu : </h4> <label> Type de contenu : </label>`
+
+    console.log(message.content.type)
 
     html += `
     <select class="contentType">`
@@ -283,7 +284,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
             `
             break;
 
-
         default:
             html += `
                 <option value="" selected="selected"> Choissisez un type de message </option>
@@ -293,18 +293,91 @@ const ShowAMessage = (message, remove, Ischoice) => {
             break;
 
     }
-
     html += `</select>`
 
+    const regExpImg = new RegExp(/^(.*?)(?=(\.))/gm)
+    let stringImg = "image"
+    stringImg = message.content.data.match(regExpImg)
+    if (stringImg == null || stringImg == undefined || stringImg.length == 0) {
+        stringImg = ""
+    } else {
+        stringImg = stringImg
+    }
 
+    const regExpExt = new RegExp(/(?<=(\.))(.*?)$/gm)
+    let stringExt = message.content.data.match(regExpExt)
+    if (stringExt == null || stringExt == undefined || stringExt.length == 0) {
+        stringExt = "png"
+    } else {
+        stringExt = stringExt[0]
+    }
 
     html += `
     <div>
-        <label> Contenu : </label>
-        <textarea class = "contentData">${message.content.data}</textarea>
+    <label> Contenu : </label>
     </div>
-    </div>
+    <div class="flexcontent">
+        <textarea class = "contentData">${stringImg}</textarea>
+    
     `
+
+
+    console.log(stringExt)
+
+    if (message.content.type == "image") {
+        html += `
+        <select class="contentExt">`
+        switch (stringExt) {
+            case "png":
+                html += `
+                        <option value="png" selected="selected"> .png </option>
+                        <option value="jpg" > .jpg </option>
+                        <option value="jpeg" > .jpeg </option>
+
+                        `
+
+                break;
+
+            case "jpg":
+
+                html += `
+                            <option value="png" > .png </option>
+                            <option value="jpg" selected="selected"> .jpg </option>
+                            <option value="jpeg"> .jpeg </option>
+
+                            `
+
+
+                break;
+
+            case "jpeg":
+                html += `
+                            <option value="png" > .png </option>
+                            <option value="jpg" > .jpg </option>
+                            <option value="jpeg" selected="selected"> .jpeg </option>
+
+                            `
+
+
+                break;
+            default:
+                html += `
+                <option value="png" > .png </option>
+                <option value="jpg" > .jpg </option>
+                <option value="jpeg"> .jpeg </option>
+                `
+        }
+
+    } else {
+        html += `<select hidden class="contentExt">
+                <option hidden value="" selected="selected"></option> 
+
+                `
+    }
+    html += ` 
+                </select>
+                </div>
+                </div>`
 
     return html
 }
@@ -313,11 +386,11 @@ const ShowAMessage = (message, remove, Ischoice) => {
 const ShowOptionChoice = (poss) => {
     let html = ""
 
-    html += `<div class="branchingPoss shadow card PadCard">`
+    html += ` <div class = "branchingPoss shadow card PadCard"> `
 
-    html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
+    html += ` <button class = "deletePoss btn btn-danger btn-sm"> Supprimer le choix </button>`
 
-    html += `    <h3> Relier ce choix a une branche </h3>
+    html += `<h3> Relier ce choix a une branche </h3>
     <label> Selectionné la branche relier </label>
     <select class="branchIDNext"> `
 
@@ -402,7 +475,6 @@ const ShowOptionTest = (poss) => {
     html += "</div>"
     html += "</div>"
 
-
     return html
 
 }
@@ -426,7 +498,8 @@ const ShowOptionChange = (poss) => {
         }
     });
 
-    html += `</select>`
+    html += `</select>
+            </div>`
     return html
 }
 
@@ -434,13 +507,13 @@ const ShowOptionChange = (poss) => {
 const ShowBranchingPoint = (branch) => {
     let html = ""
 
-    html += `<div class="branchingPoint PadCard">
+    html += `
+    <div class="branchingPoint PadCard">
         <div class="shadow card PadCard Embranchement">
         <label> A la fin de cette branche : </label> 
         <select class="bpType">
         
     `
-    console.log(branch.branchingPoint.type);
     switch (branch.branchingPoint.type) {
         case "choice":
             html += `
@@ -510,8 +583,9 @@ const ShowBranchingPoint = (branch) => {
         html += `<button class="addPossibilities btn btn-info btn-lg Ajoutertest"> Ajouter une autre options </button>`
     }
 
-    html += `</div>`
-    html += `</div>`
+    html += `</div>
+                `
+
 
     return html
 }
@@ -584,8 +658,9 @@ const RetrieveData = () => {
         let messagesList = []
         let messages = div.querySelectorAll(":scope > .message")
         messages.forEach(message => {
+            let charImagenoPoint = message.querySelector(".contentData").value.replace(/\./gmi, '')
             let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
-            let content = new Content(message.querySelector(".contentType").value, message.querySelector(".contentData").value)
+            let content = new Content(message.querySelector(".contentType").value, charImagenoPoint + "." + message.querySelector(".contentExt").value)
             messagesList.push(new Message(isNpc, content))
         });
 
@@ -937,7 +1012,6 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 
         AddToNewChild(newCurrentBranch)
 
-
     }
 
     const RemovePoss = () => {
@@ -1032,8 +1106,6 @@ const Refresh = (currentConv) => {
     allBranches = currentConv.Branches
 
     GetAllBranchesHTML()
-
-
 
     //Nous générons un nouvelle arbre
     GenerateTree(allBranchesHTML)

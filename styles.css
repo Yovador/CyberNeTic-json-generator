@@ -133,3 +133,15 @@
 .charPP {
     width: 70%;
 }
+
+.contentData {
+    width: 70%;
+}
+
+.contentExt {
+    width: 30%;
+}
+
+.flexcontent {
+    display: flex;
+}
