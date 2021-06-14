@@ -101,7 +101,6 @@ class BranchHTML {
         return found
     }
 
-
 }
 
 const GenerateTree = (branches) => {
@@ -153,8 +152,6 @@ const GenerateTree = (branches) => {
                 }
             }
 
-
-
             if (parentBranch != null) {
                 switch (parentBranch.branch.branchingPoint.type) {
                     case "choice":
@@ -167,7 +164,6 @@ const GenerateTree = (branches) => {
                         let div = CreateNewDiv("", parentBranch.childsDiv, null, "floor", true)
                         finalParentDiv = div
                         break;
-
 
                     default:
                         finalParentDiv = parentBranch.div.parentNode
@@ -183,7 +179,6 @@ const GenerateTree = (branches) => {
             //BranchToHtml génère le html
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), finalParentDiv, null, "branch box shadow", true)
 
-
             //Pour chaque branche enfant de la branche actuelle, on relance la fonction pour créé une nouvelle branche
             branch.branch.branchingPoint.possibilities.forEach(poss => {
                 if (!listOfBranch.includes(poss.branch)) {
@@ -195,7 +190,6 @@ const GenerateTree = (branches) => {
 
     //On commence par la première branche de la liste
     CreateBranch(branches, branches[0])
-
 
     let unusedBranchDiv = CreateUnusedBranch()
 
@@ -211,7 +205,6 @@ const GenerateTree = (branches) => {
                 DeleteUnusedBranch(parentDiv)
             })
 
-
             branch.div = CreateNewDiv(BranchToHtml(branch.branch), parentDiv, null, "branch box shadow", true)
 
             parentDiv.appendChild(branch.div)
@@ -219,8 +212,6 @@ const GenerateTree = (branches) => {
     });
 
 }
-
-
 
 //Génère un string contenant le html d'un message
 const ShowAMessage = (message, remove, Ischoice) => {
@@ -240,8 +231,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
         var PropSMSPlayer = document.getElementById("playerCharacterInput").value
 
         var PropSMSNpc = document.getElementById("npCharacterInput").value
-
-
 
         if (message.isNpc) {
             html += `
@@ -321,7 +310,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
     
     `
 
-
     console.log(stringExt)
 
     if (message.content.type == "image") {
@@ -371,14 +359,12 @@ const ShowAMessage = (message, remove, Ischoice) => {
     } else {
         html += `<select hidden class="contentExt">
                 <option hidden value="" selected="selected"></option> 
-
                 `
     }
     html += ` 
                 </select>
                 </div>
                 </div>`
-
     return html
 }
 
@@ -393,8 +379,6 @@ const ShowOptionChoice = (poss) => {
     html += `<h3> Relier ce choix a une branche </h3>
     <label> Selectionné la branche relier </label>
     <select class="branchIDNext"> `
-
-
 
     if (poss.possible) {
         allBranches.forEach(branchFromAll => {
@@ -1189,7 +1173,6 @@ const UpdateConversation = () => {
 
     //Mise à jour des différents éléments de l'arbre
     Refresh(currentConv)
-
 }
 
 const GetAllBranchesHTML = () => {
