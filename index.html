@@ -17,48 +17,55 @@
 
 <body>
     <div class="global" id="global">
-        <div class="card text-center">
-            <div class="mainParam  mx-auto">
-                <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
-                <br> <a href="./characterGen.html"><button class="btn btn-success btn-sm">Générateur de groupe de
-                        personnages</button></a>
-                <div id="generatorVersion" class="p-2"></div>
+        <div class="card text-center mainParam header">
+            
+            <div class="mx-auto maincontain">
+                <div class="firstcontain">
+                    <div class="">
+                        <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
+                        <a href="./characterGen.html"><button class="btn btn-success btn-sm btngrpperso">Générateur de groupe de personnages</button></a>
+                        <div id="generatorVersion" class="p-2"></div>
+                    </div>
 
-                <div class="parameter">
-                    <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
+                    <div class="parameter">
+                        <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
+                    </div>
+
+                    
+                    <div class="parameter">
+                        <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
+                    </div>
+                    <div class="select">
+                        <select class="form-select" id="mediumInput">
+                            <option value="Sms" selected="selected"> Sms </option>
+                            <option value="Messenger"> Messenger </option>
+                            <option value="Snapchat"> Snapchat </option>
+                            <option value="Whatsapp"> Whatsapp </option>
+                        </select>
+                    </div>
+                    
                 </div>
-
-                <div class="select">
-                    <select class="form-select" id="mediumInput">
-                        <option value="Sms" selected="selected"> Sms </option>
-                        <option value="Messenger"> Messenger </option>
-                        <option value="Snapchat"> Snapchat </option>
-                        <option value="Whatsapp"> Whatsapp </option>
-                    </select>
-                </div>
-
-                <div class="parameter">
-                    <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
-                </div>
-
-                <div class="parameter">
-                    <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
-                </div>
-
-                <div class="parameter">
-                    <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
-                </div>
-
-                <div class="parameter">
-                    <input class="form-control" id="dateInput" type="date">
-                </div>
-
-                <div class="parameter">
-                    <input class="form-control" id="timeInput" type="time">
+                
+                <div class="secondcontain">
+                    <div class="parameter">
+                        <input class="form-control" id="dateInput" type="date">
+                    </div>
+                    
+                    <div class="parameter">
+                        <input class="form-control" id="timeInput" type="time">
+                    </div>
+                    <div class="parameter">
+                        <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
+                    </div>
+                    
+                    <div class="parameter">
+                        <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
+                    </div>
                 </div>
 
             </div>
-            <div class="card-footer mainParam mx-auto">
+
+            <div class="card-footer mainParam mx-auto secondmaincontain">
                 <form class="">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Importer une conversation :</label>
@@ -74,6 +81,7 @@
                     </a>
                 </div>
             </div>
+
         </div>
 
 
