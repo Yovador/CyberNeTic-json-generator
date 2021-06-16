@@ -10,18 +10,18 @@
     <script type="module" src="./js/characterSetGen.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
     <link href="./styles.css" rel="stylesheet">
-
 </head>
 
 <body>
     <div id="global" class="global">
-        <div class="card text-center">
-            <div class="mainParam  mx-auto">
+        <div class="card text-center mainParam">
+            <div class="mainParam mx-auto">
                 <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
+                <a href="./characterGen.html"><button class="btn btn-success btn-sm">Générateur de groupe de
+                    personnages</button></a>
                 <div id="generatorVersion" class="p-2"></div>
             </div>
             <div class="mainParam mx-auto">
-
                 <div class="parameter">
                     <label> Exporter le groupe de personnages : </label>
                     <a id="downloadAnchorElem"> <button type="submit" class="btn btn-info btn-sm ">DOWNLOAD</button> </a>
@@ -37,10 +37,10 @@
                 </div>
             </div>
 
-            <div class="mainParam mx-auto">
-                <div class="parameter">
-                    <button id="addCharacter" class="btn  btn-info">Ajouter un personnage</button>
-                </div>
+        </div>
+        <div class="mainParam mx-auto">
+            <div class="parameter">
+                <button id="addCharacter" class="btn  btn-info">Ajouter un personnage</button>
             </div>
         </div>
 

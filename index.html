@@ -18,13 +18,11 @@
 <body>
     <div class="global" id="global">
         <div class="card text-center">
-            <div class="mainParam mx-auto">
-                <a href="./characterGen.html"><button class="btn btn-success btn-sm">Générateur de groupe de
+            <div class="mainParam  mx-auto">
+                <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
+                <br> <a href="./characterGen.html"><button class="btn btn-success btn-sm">Générateur de groupe de
                         personnages</button></a>
                 <div id="generatorVersion" class="p-2"></div>
-            </div>
-
-            <div class="mainParam  mx-auto">
 
                 <div class="parameter">
                     <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
@@ -61,19 +59,20 @@
 
             </div>
             <div class="card-footer mainParam mx-auto">
-                <div class="mr-2">
-                    <label> Exporter la conversation : </label>
-                    <a id="downloadAnchorElem"> <button type="submit" class="btn btn-info btn-sm ">DOWNLOAD</button>
-                    </a>
-                </div>
-                <form class="btnmenu">
+                <form class="">
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Importer une conversation :</label>
                         <input type="file" id="jsonFile" class="form-control-file">
                     </div>
                 </form>
-                <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2">Mettre la conversation à
+                <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2 btnmenu">Mettre la conversation à
                     0</button>
+
+                <div class="mr-2">
+                    <label> Exporter la conversation : </label>
+                    <a id="downloadAnchorElem"> <button type="submit" class="btn btn-info btn-sm ">DOWNLOAD</button>
+                    </a>
+                </div>
             </div>
         </div>
 
