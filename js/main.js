@@ -1201,6 +1201,21 @@ const LoadFromFile = () => {
             console.log("error reading file");
         }
     }
+
+    //Changement du select medium en fonction du fichier chargée
+    if (conversation.Parameters.medium.value == "Sms"){
+        document.getElementById('mediumInput').selectedIndex = 0;
+    }
+    if (conversation.Parameters.medium.value == "Messenger"){
+        document.getElementById('mediumInput').selectedIndex = 1;
+    }
+    if (conversation.Parameters.medium.value == "Snapchat"){
+        document.getElementById('mediumInput').selectedIndex = 2;
+    }
+    if (conversation.Parameters.medium.value == "Whatsapp"){
+        document.getElementById('mediumInput').selectedIndex = 3;
+    }
+
 }
 
 
