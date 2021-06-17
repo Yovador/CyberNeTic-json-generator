@@ -18,48 +18,56 @@
 <body>
     <div class="global" id="global">
         <div class="card text-center mainParam header">
-            
+
             <div class="mx-auto maincontain">
                 <div class="firstcontain">
-                    <div class="">
+                    <div>
                         <a href="./index.html"><button class="btn btn-success btn-sm">Générateur de conversation</button></a>
                         <a href="./characterGen.html"><button class="btn btn-success btn-sm btngrpperso">Générateur de groupe de personnages</button></a>
                         <div id="generatorVersion" class="p-2"></div>
                     </div>
 
                     <div class="parameter">
-                        <input class="form-control" id="convNameInput" type="text" placeholder="Nom de la conversation">
+                        <label>Nom de la conversation</label>
+                        <input class="form-control" id="convNameInput" type="text" placeholder="Ex : Chap 1">
                     </div>
 
-                    
+
                     <div class="parameter">
-                        <input class="form-control" id="playerCharacterInput" type="text" placeholder="Personnage du joueur">
+                        <label>Personnage du joueur</label>
+                        <input class="form-control" id="playerCharacterInput" type="text" placeholder="Ex : Enzo">
                     </div>
+
                     <div class="select">
+                        <label>Choix de l'application</label>
                         <select class="form-select" id="mediumInput">
-                            <option value="Sms" selected="selected"> Sms </option>
-                            <option value="Messenger"> Messenger </option>
-                            <option value="Snapchat"> Snapchat </option>
-                            <option value="Whatsapp"> Whatsapp </option>
+                            <option value="sms" selected="selected"> Sms </option>
+                            <option value="messenger"> Messenger </option>
+                            <option value="snapchat"> Snapchat </option>
+                            <option value="whatsapp"> Whatsapp </option>
                         </select>
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="secondcontain">
                     <div class="parameter">
+                        <label>Date de la conversation</label>
                         <input class="form-control" id="dateInput" type="date">
                     </div>
-                    
+
                     <div class="parameter">
+                        <label></label>
                         <input class="form-control" id="timeInput" type="time">
                     </div>
                     <div class="parameter">
-                        <input class="form-control" id="nextConversationInput" type="text" placeholder="conversation suivante">
+                        <label>Conversation suivante</label>
+                        <input class="form-control" id="nextConversationInput" type="text" placeholder="Ex : Chap 2">
                     </div>
-                    
+
                     <div class="parameter">
-                        <input class="form-control" id="npCharacterInput" type="text" placeholder="Personnage non joueur">
+                        <label>Personnage non joueur</label>
+                        <input class="form-control" id="npCharacterInput" type="text" placeholder="Ex : Pauline">
                     </div>
                 </div>
 

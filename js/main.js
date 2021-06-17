@@ -251,7 +251,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
 
     html += `</select> <h4> Contenu : </h4> <label> Type de contenu : </label>`
 
-    console.log(message.content.type)
 
     html += `
     <select class="contentType">`
@@ -310,7 +309,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
     
     `
 
-    console.log(stringExt)
 
     if (message.content.type == "image") {
         html += `
@@ -800,13 +798,9 @@ const AddNewPoss = (possDiv, num) => {
 }
 
 const RemovePoss = (branchDiv, num, possDiv) => {
-    console.log("removeposs", branchDiv, num)
     let branch = BranchHTML.FindBranchByDiv(branchDiv).branch
-    console.log("remove", possDiv.querySelector(".branchIDNext"), possDiv)
     let allPoss = Array.from(branchDiv.querySelectorAll(".branchingPoss"))
-    console.log(allPoss)
     let possID = allPoss.indexOf(possDiv)
-    console.log(possID)
     ChangeConversation(branch, branch.branchingPoint.type, 0, "remove", possID)
 }
 
@@ -944,7 +938,6 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
     }
 
     const AddNewPoss = () => {
-        console.log(conversation)
         newCurrentBranch.branchingPoint.possibilities = oldBranch.branchingPoint.possibilities
         switch (branchingType) {
             case "choice":
@@ -981,7 +974,6 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
                         for (const branch of allBranches) {
                             if (poss.branch == branch.id && !newChildBranch.includes(branch)) {
                                 newChildBranch.push(branch)
-                                console.log(newChildBranch)
                                 AddToNewChild(branch)
 
                             }
@@ -1000,7 +992,6 @@ const ChangeConversation = (oldBranch, branchingType, possNumber, replace, possI
 
     const RemovePoss = () => {
         newCurrentBranch.branchingPoint.possibilities = oldBranch.branchingPoint.possibilities
-        console.log(possID)
 
         newCurrentBranch.branchingPoint.possibilities.splice(possID, 1)
 
@@ -1082,6 +1073,9 @@ const ResetConversation = () => {
         Branches: [new Branch("-0", [], new BranchingPoint("stop", []))]
     }
     Refresh(conversation)
+
+
+    document.getElementById('mediumInput').selectedIndex = "sms"
 }
 
 const Refresh = (currentConv) => {
@@ -1203,18 +1197,9 @@ const LoadFromFile = () => {
     }
 
     //Changement du select medium en fonction du fichier chargée
-    if (conversation.Parameters.medium.value == "Sms"){
-        document.getElementById('mediumInput').selectedIndex = 0;
-    }
-    if (conversation.Parameters.medium.value == "Messenger"){
-        document.getElementById('mediumInput').selectedIndex = 1;
-    }
-    if (conversation.Parameters.medium.value == "Snapchat"){
-        document.getElementById('mediumInput').selectedIndex = 2;
-    }
-    if (conversation.Parameters.medium.value == "Whatsapp"){
-        document.getElementById('mediumInput').selectedIndex = 3;
-    }
+
+    var mediumInput = document.getElementById('mediumInput')
+    conversation.Parameters.medium.value = mediumInput.selectedIndex
 
 }
 
