@@ -11,7 +11,7 @@ import ExportJson from "./exportJson.js"
 import AddZoom from "./addZoom.js"
 import CreateNewDiv from "./CreateNewDiv.js"
 
-const generatorVersion = 0.3
+const generatorVersion = 0.4
 document.getElementById("generatorVersion").innerHTML = `Version : ${generatorVersion}`
 
 const defaultMessage = {
@@ -35,7 +35,7 @@ const defaultChoicePoss = {
 }
 const defaultTestPoss = {
     branch: "",
-    thresholds: [0, 1]
+    threshold: 0
 }
 const defaultChangePoss = {
     branch: ""
@@ -423,21 +423,29 @@ const ShowOptionChoice = (poss) => {
 }
 const ShowOptionTest = (poss) => {
     let html = ""
+
     html += `<div class="branchingPoss shadow card PadCard">`
+        // if (branch.branchingPoint.possibilities.isDefault.value == "true") {
+
     html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
     html += `<h3> Option de Test : </h3>
-    <div>
-        <label> Bornes minimal : </label>
-        <input class="thresholdMin" type="number" step="any" value="${poss.thresholds[0]}"/>
-    </div>
-    <div>
-        <label> Bornes maximal : </label>
-        <input class="thresholdMax" type="number" step="any" value="${poss.thresholds[1]}"/>
-    </div>
-    <div>
-        <label> Branches suivantes: </label>
-        <select class="branchIDNext"> 
-    `
+            <div>
+            <label> Si la variable de confiance est</label>
+
+
+            <select>
+                <option value="supérieur" > supérieur </option>
+                <option value="inférieur" > inférieur </option>
+            </select>
+
+
+            <input class="threshold" type="number" step="any" value="${poss.threshold[0]}"/>
+            </div>
+            <div>
+            <label> Branches suivantes: </label>
+            <select class="branchIDNext"> 
+            `
+        // }
     allBranches.forEach(branchFromAll => {
         if (allBranches.indexOf(branchFromAll) != 0) {
             switch (branchFromAll.id) {
@@ -521,9 +529,8 @@ const ShowBranchingPoint = (branch) => {
             </div>
                     `
 
-
             branch.branchingPoint.possibilities.forEach(poss => {
-
+                // console.log(branch.branchingPoint.possibilities.isDefault)
 
                 html += ShowOptionTest(poss)
 
@@ -640,11 +647,34 @@ const RetrieveData = () => {
 
     const RetrieveMessage = (div) => {
         let messagesList = []
-        let messages = div.querySelectorAll(":scope > .message")
-        messages.forEach(message => {
-            let charImagenoPoint = message.querySelector(".contentData").value.replace(/\./gmi, '')
-            let isNpc = !Boolean(parseInt(message.querySelector(".isNpcChoice").value))
-            let content = new Content(message.querySelector(".contentType").value, charImagenoPoint + "." + message.querySelector(".contentExt").value)
+        let messagesDiv = div.querySelectorAll(":scope > .message")
+        messagesDiv.forEach(messageDiv => {
+            let isNpc = !Boolean(parseInt(messageDiv.querySelector(".isNpcChoice").value))
+            let content = new Content()
+
+            // console.log(messageDiv)
+            // if (messageDiv.content.type == "image") {
+            //     let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
+            //     content = new Content(messageDiv.querySelector(".contentType").value, charImagenoPoint + "." + messageDiv.querySelector(".contentExt").value)
+
+            // } else {
+            //     let chartextnoPoint = messageDiv.querySelector(".contentData").value.replace()
+            //     content = new Content(messageDiv.querySelector(".contentType").value, chartextnoPoint)
+            // }
+            let contentType = messageDiv.querySelector(".contentType").value
+            console.log(messageDiv.querySelector(".contentType").value)
+            switch (contentType) {
+                case "image":
+                    let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
+                    content = new Content(contentType, charImagenoPoint + "." + messageDiv.querySelector(".contentExt").value)
+                    break;
+
+                case "text":
+                    let chartextnoPoint = messageDiv.querySelector(".contentData ").value.replace()
+                    content = new Content(contentType, chartextnoPoint)
+                    break;
+            }
+
             messagesList.push(new Message(isNpc, content))
         });
 
@@ -728,11 +758,10 @@ const RetrieveData = () => {
                 branchingPossDiv = branchingPointDiv.querySelectorAll(".branchingPoss")
                 branchingPossDiv.forEach(poss => {
                     let id = GetNextBranchID(poss)
-                    let thresholdMin = poss.querySelector(".thresholdMin").value
-                    let thresholdMax = poss.querySelector(".thresholdMax").value
+                    let Threshold = poss.querySelector(".threshold").value
                     branchingPossibilites.push({
                         branch: id,
-                        thresholds: [thresholdMin, thresholdMax]
+                        threshold: Threshold
                     })
 
 
