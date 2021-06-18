@@ -1,5 +1,5 @@
 {
-    "version": 0.3,
+    "version": 0.4,
     "Parameters": {
         "id": "chapitre1",
         "startingBranch": "C1Start",
@@ -106,17 +106,29 @@
                 "possibilities": [
                     {
                         "branch": "C1AA",
-                        "thresholds": [
-                            3,
-                            200
-                        ]
+                        "isDefault": true,
+                        "threshold": null,
+                        "checkIfSup": null
                     },
                     {
                         "branch": "C1AB",
-                        "thresholds": [
-                            0,
-                            2
-                        ]
+                        "isDefault": false,
+                        "threshold": 2,
+                        "checkIfSup": true
+                    }
+                    ,
+                    {
+                        "branch": "C1AB",
+                        "isDefault": false,
+                        "threshold": -2,
+                        "checkIfSup": false
+                    }
+                    ,
+                    {
+                        "branch": "C1AB",
+                        "isDefault": false,
+                        "threshold": 0,
+                        "checkIfSup": true
                     }
                 ]
             }
