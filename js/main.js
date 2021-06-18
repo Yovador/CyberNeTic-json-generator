@@ -523,6 +523,8 @@ const ShowBranchingPoint = (branch) => {
 
 
             branch.branchingPoint.possibilities.forEach(poss => {
+
+
                 html += ShowOptionTest(poss)
 
             });
