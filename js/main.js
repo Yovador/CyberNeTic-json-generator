@@ -421,52 +421,116 @@ const ShowOptionChoice = (poss) => {
 
     return html
 }
-const ShowOptionTest = (poss) => {
+const ShowOptionTest = (poss, i) => {
     let html = ""
-
-    html += `<div class="branchingPoss shadow card PadCard">`
-        // if (branch.branchingPoint.possibilities.isDefault.value == "true") {
-
-    html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
-    html += `<h3> Option de Test : </h3>
+    if (i == 0) {
+        html += `<div class="branchingPoss shadow card PadCard">`
+        html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
+        html += `<h3> Option par defaut : </h3>
             <div>
-            <label> Si la variable de confiance est</label>
+            <label> Par defaut, la branche suivante est :</label>`
+
+        html += `
+        <select class="Infsup" hidden>
+            <option value="" hidden></option>
+        </select>`
+
+        html += `
+        <select class="IsDefault" hidden>
+            <option value="true" hidden></option>
+        </select>`
 
 
-            <select>
-                <option value="supérieur" > supérieur </option>
-                <option value="inférieur" > inférieur </option>
-            </select>
 
+        html += `
+        <input hidden class="threshold" type="number" step="any" value="Null"/>
+        </div>
+        <select class="branchIDNext"> 
+         `
 
-            <input class="threshold" type="number" step="any" value="${poss.threshold[0]}"/>
-            </div>
-            <div>
-            <label> Branches suivantes: </label>
-            <select class="branchIDNext"> 
-            `
-        // }
-    allBranches.forEach(branchFromAll => {
-        if (allBranches.indexOf(branchFromAll) != 0) {
-            switch (branchFromAll.id) {
-                case poss.branch:
-                    html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
-                    break;
-                default:
-                    html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
-                    break;
+        allBranches.forEach(branchFromAll => {
+            if (allBranches.indexOf(branchFromAll) != 0) {
+                switch (branchFromAll.id) {
+                    case poss.branch:
+                        html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
+                        break;
+                    default:
+                        html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
+                        break;
+                }
             }
+        });
+
+
+
+        html += `</select>`
+        html += "</div>"
+
+
+        return html
+
+    } else {
+
+        html += `<div class="branchingPoss shadow card PadCard">`
+
+        html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
+        html += `<h3> Option de Test : </h3>
+            <div>
+            <label> Si la variable de confiance est</label>`
+
+        if (poss.threshold > 0) {
+            html += `
+           <select class="Infsup">
+                <option value="supérieur" selected="selected"> supérieur à</option>
+            </select>`
+        } else if (poss.threshold < 0) {
+            html += `
+           <select class="Infsup">
+                <option value="inférieur" selected="selected"> inférieur à</option>
+            </select>`
+        } else {
+            html += `
+        <select class="Infsup">
+            <option value="supérieur" selected="selected"> supérieur à</option>
+            <option value="inférieur" > inférieur à</option>
+        </select>`
         }
-    });
+
+        html += `
+        <select class="IsDefault" hidden>
+            <option value="" hidden></option>
+        </select>`
+
+
+        html += `
+        <input class="threshold" type="number" step="any" value="${poss.threshold}"/>
+        </div>
+        <label>alors la branche suivante est :</label>
+        <select class="branchIDNext"> 
+         `
+
+        allBranches.forEach(branchFromAll => {
+            if (allBranches.indexOf(branchFromAll) != 0) {
+                switch (branchFromAll.id) {
+                    case poss.branch:
+                        html += `<option value="${branchFromAll.id}" selected="selected"> ${branchFromAll.id} </option> `
+                        break;
+                    default:
+                        html += `<option value="${branchFromAll.id}"> ${branchFromAll.id} </option> `
+                        break;
+                }
+            }
+        });
 
 
 
-    html += `</select>`
-    html += "</div>"
-    html += "</div>"
+        html += `</select>`
+        html += "</div>"
 
-    return html
 
+        return html
+
+    }
 }
 const ShowOptionChange = (poss) => {
     let html = ""
@@ -529,12 +593,13 @@ const ShowBranchingPoint = (branch) => {
             </div>
                     `
 
-            branch.branchingPoint.possibilities.forEach(poss => {
-                // console.log(branch.branchingPoint.possibilities.isDefault)
+            for (let i = 0; i < branch.branchingPoint.possibilities.length; i++) {
+                const poss = branch.branchingPoint.possibilities[i];
 
-                html += ShowOptionTest(poss)
+                html += ShowOptionTest(poss, i)
 
-            });
+            }
+
             break;
         case "change":
             html += `
@@ -662,7 +727,6 @@ const RetrieveData = () => {
             //     content = new Content(messageDiv.querySelector(".contentType").value, chartextnoPoint)
             // }
             let contentType = messageDiv.querySelector(".contentType").value
-            console.log(messageDiv.querySelector(".contentType").value)
             switch (contentType) {
                 case "image":
                     let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
@@ -758,10 +822,25 @@ const RetrieveData = () => {
                 branchingPossDiv = branchingPointDiv.querySelectorAll(".branchingPoss")
                 branchingPossDiv.forEach(poss => {
                     let id = GetNextBranchID(poss)
-                    let Threshold = poss.querySelector(".threshold").value
+                    let Threshold = parseInt(poss.querySelector(".threshold").value)
+                    let SupInf = poss.querySelector(".Infsup").value
+                    if (SupInf == "supérieur") {
+                        SupInf = true
+                    } else if (SupInf == "inférieur") {
+                        SupInf = false
+                    } else {
+                        SupInf = null
+                    }
+                    let Isdefault = Boolean(poss.querySelector(".IsDefault").value)
+
+
+
                     branchingPossibilites.push({
                         branch: id,
-                        threshold: Threshold
+                        isDefault: Isdefault,
+                        threshold: Threshold,
+                        checkIfSup: SupInf
+
                     })
 
 
@@ -1262,5 +1341,7 @@ document.getElementById("global").addEventListener('change', function() {
 document.getElementById("resetButton").addEventListener('click', function() {
     ResetConversation()
 })
+
+AddZoom(document.querySelector('#branches'))
 
 AddZoom(document.querySelector('#branches'))
