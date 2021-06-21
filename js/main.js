@@ -325,7 +325,6 @@ const ShowAMessage = (message, remove, Ischoice) => {
     if (message.content.type == "image") {
         html += `
         <select class="contentExt">`
-        console.log(stringExt)
         switch (stringExt) {
             case "png":
                 html += `
@@ -436,6 +435,7 @@ const ShowOptionChoice = (poss) => {
 }
 const ShowOptionTest = (poss, i) => {
     let html = ""
+
     if (i == 0) {
         html += `<div class="branchingPoss shadow card PadCard">`
         html += `<h3> Par defaut, la branche suivante est : </h3>
@@ -498,11 +498,23 @@ const ShowOptionTest = (poss, i) => {
                 <option value="inférieur" selected="selected"> inférieur à</option>
             </select>`
         } else {
-            html += `
-        <select class="Infsup">
-            <option value="supérieur"> supérieur à</option>
-            <option value="inférieur" > inférieur à</option>
-        </select>`
+
+            switch (poss.checkIfSup) {
+                case true:
+                    html += `
+                        <select class="Infsup">
+                            <option value="supérieur" selected="selected"> supérieur à</option>
+                            <option value="inférieur"> inférieur à</option>
+                        </select>`
+                    break
+                case false:
+                    html += `
+                            <select class="Infsup">
+                                <option value="supérieur"> supérieur à</option>
+                                <option value="inférieur" selected="selected"> inférieur à</option>
+                            </select>`
+                    break
+            }
         }
 
         html += `
@@ -866,8 +878,6 @@ const RetrieveData = () => {
                         branch: id
                     })
                 })
-
-
 
                 break;
         }
@@ -1255,8 +1265,6 @@ const Refresh = (currentConv) => {
         }
 
     });
-
-
 
 }
 

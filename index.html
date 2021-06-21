@@ -9,6 +9,7 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="./styles.css" rel="stylesheet">
+    <link href="./menu.css" rel="stylesheet">
     <script type="module" src="./js/main.js" defer></script>
     <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
 
@@ -17,6 +18,9 @@
 
 <body>
     <div class="global" id="global">
+
+
+
         <div class="card text-center mainParam header">
 
             <div class="mx-auto maincontain">
@@ -41,11 +45,11 @@
                     <div class="select">
                         <label>Choix de l'application</label>
                         <select class="form-select" id="mediumInput">
-                            <option value="sms" selected="selected"> Sms </option>
-                            <option value="messenger"> Messenger </option>
-                            <option value="snapchat"> Snapchat </option>
-                            <option value="whatsapp"> Whatsapp </option>
-                        </select>
+                                        <option value="sms" selected="selected"> Sms </option>
+                                        <option value="messenger"> Messenger </option>
+                                        <option value="snapchat"> Snapchat </option>
+                                        <option value="whatsapp"> Whatsapp </option>
+                                    </select>
                     </div>
 
                 </div>
@@ -81,7 +85,7 @@
                     </div>
                 </form>
                 <button type="submit" id="resetButton" class="btn btn-danger btn-sm ml-2 btnmenu">Mettre la conversation à
-                    0</button>
+                                0</button>
 
                 <div class="mr-2">
                     <label> Exporter la conversation : </label>
@@ -91,6 +95,9 @@
             </div>
 
         </div>
+
+
+
 
 
         <div class="panzoom-container" id="branches-container">
