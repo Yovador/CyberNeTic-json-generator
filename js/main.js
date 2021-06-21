@@ -283,29 +283,41 @@ const ShowAMessage = (message, remove, Ischoice) => {
     }
     html += `</select>`
 
-    const regExpImg = new RegExp(/^(.*?)(?=(\.))/gm)
-    let stringImg = "image"
-    stringImg = message.content.data.match(regExpImg)
-    if (stringImg == null || stringImg == undefined || stringImg.length == 0) {
-        stringImg = ""
-    } else {
-        stringImg = stringImg
-    }
-
+    let stringcontent = ""
     const regExpExt = new RegExp(/(?<=(\.))(.*?)$/gm)
     let stringExt = message.content.data.match(regExpExt)
-    if (stringExt == null || stringExt == undefined || stringExt.length == 0) {
-        stringExt = "png"
-    } else {
-        stringExt = stringExt[0]
-    }
+    switch (message.content.type) {
 
+        case "text":
+            stringcontent = message.content.data
+            break;
+        case "image":
+
+            const regExpImg = new RegExp(/^(.*?)(?=(\.))/gm)
+
+            stringcontent = message.content.data.match(regExpImg)
+            if (stringcontent == null || stringcontent == undefined || stringcontent.length == 0) {
+                stringcontent = ""
+            } else {
+                stringcontent = stringcontent[0]
+            }
+
+            if (stringExt == null || stringExt == undefined || stringExt.length == 0) {
+                stringExt = "png"
+            } else {
+                stringExt = stringExt[0]
+            }
+
+            break;
+
+
+    }
     html += `
     <div>
     <label> Contenu : </label>
     </div>
     <div class="flexcontent">
-        <textarea class = "contentData">${stringImg}</textarea>
+        <textarea class = "contentData">${stringcontent}</textarea>
     
     `
 
@@ -313,6 +325,7 @@ const ShowAMessage = (message, remove, Ischoice) => {
     if (message.content.type == "image") {
         html += `
         <select class="contentExt">`
+        console.log(stringExt)
         switch (stringExt) {
             case "png":
                 html += `
@@ -425,10 +438,8 @@ const ShowOptionTest = (poss, i) => {
     let html = ""
     if (i == 0) {
         html += `<div class="branchingPoss shadow card PadCard">`
-        html += `<button class="deletePoss btn btn-danger btn-sm">Supprimer le choix</button>`
-        html += `<h3> Option par defaut : </h3>
-            <div>
-            <label> Par defaut, la branche suivante est :</label>`
+        html += `<h3> Par defaut, la branche suivante est : </h3>
+            <div>`
 
         html += `
         <select class="Infsup" hidden>
@@ -439,8 +450,6 @@ const ShowOptionTest = (poss, i) => {
         <select class="IsDefault" hidden>
             <option value="true" hidden></option>
         </select>`
-
-
 
         html += `
         <input hidden class="threshold" type="number" step="any" value="Null"/>
@@ -491,7 +500,7 @@ const ShowOptionTest = (poss, i) => {
         } else {
             html += `
         <select class="Infsup">
-            <option value="supérieur" selected="selected"> supérieur à</option>
+            <option value="supérieur"> supérieur à</option>
             <option value="inférieur" > inférieur à</option>
         </select>`
         }
@@ -502,12 +511,15 @@ const ShowOptionTest = (poss, i) => {
         </select>`
 
 
+
         html += `
         <input class="threshold" type="number" step="any" value="${poss.threshold}"/>
         </div>
         <label>alors la branche suivante est :</label>
         <select class="branchIDNext"> 
          `
+
+
 
         allBranches.forEach(branchFromAll => {
             if (allBranches.indexOf(branchFromAll) != 0) {
@@ -716,17 +728,17 @@ const RetrieveData = () => {
         messagesDiv.forEach(messageDiv => {
             let isNpc = !Boolean(parseInt(messageDiv.querySelector(".isNpcChoice").value))
             let content = new Content()
-
-            // console.log(messageDiv)
-            // if (messageDiv.content.type == "image") {
-            //     let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
-            //     content = new Content(messageDiv.querySelector(".contentType").value, charImagenoPoint + "." + messageDiv.querySelector(".contentExt").value)
-
-            // } else {
-            //     let chartextnoPoint = messageDiv.querySelector(".contentData").value.replace()
-            //     content = new Content(messageDiv.querySelector(".contentType").value, chartextnoPoint)
-            // }
             let contentType = messageDiv.querySelector(".contentType").value
+
+
+            // if (contentType == "image") {
+            //     let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
+            //     content = new Content(contentType, charImagenoPoint + "." + messageDiv.querySelector(".contentExt").value)
+            // } else {
+            //     let chartextnoPoint = messageDiv.querySelector(".contentData ").value.replace()
+            //     content = new Content(contentType, chartextnoPoint)
+            // }
+
             switch (contentType) {
                 case "image":
                     let charImagenoPoint = messageDiv.querySelector(".contentData").value.replace(/\./gmi, '')
@@ -734,8 +746,8 @@ const RetrieveData = () => {
                     break;
 
                 case "text":
-                    let chartextnoPoint = messageDiv.querySelector(".contentData ").value.replace()
-                    content = new Content(contentType, chartextnoPoint)
+                    let charText = messageDiv.querySelector(".contentData ").value
+                    content = new Content(contentType, charText)
                     break;
             }
 
