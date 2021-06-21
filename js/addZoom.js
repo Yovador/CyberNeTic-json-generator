@@ -13,12 +13,6 @@
             alert("Votre navigateur web ne supporte pas notre site web, veillez soit à le mettre à jour, soit à changer de navigateur (chrome, firefox ..).");
         }
 
-        panzoom(container, {
-            filterKey: function( /* e, dx, dy, dz */ ) {
-                // don't let panzoom handle this event:
-                return true;
-            }
-        });
     }
 
 
