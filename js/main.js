@@ -35,7 +35,9 @@ const defaultChoicePoss = {
 }
 const defaultTestPoss = {
     branch: "",
-    threshold: 0
+    isDefault: false,
+    threshold: 0,
+    checkIfSup: true
 }
 const defaultChangePoss = {
     branch: ""
@@ -443,7 +445,7 @@ const ShowOptionTest = (poss, i) => {
 
         html += `
         <select class="Infsup" hidden>
-            <option value="" hidden></option>
+            <option value="oui" hidden></option>
         </select>`
 
         html += `
@@ -486,7 +488,7 @@ const ShowOptionTest = (poss, i) => {
         html += `<h3> Option de Test : </h3>
             <div>
             <label> Si la variable de confiance est</label>`
-
+        console.log(poss)
         if (poss.threshold > 0) {
             html += `
            <select class="Infsup">
@@ -514,6 +516,7 @@ const ShowOptionTest = (poss, i) => {
                                 <option value="inférieur" selected="selected"> inférieur à</option>
                             </select>`
                     break
+                
             }
         }
 
@@ -847,6 +850,7 @@ const RetrieveData = () => {
                 branchingPossDiv.forEach(poss => {
                     let id = GetNextBranchID(poss)
                     let Threshold = parseInt(poss.querySelector(".threshold").value)
+                    console.log(poss.querySelector(".Infsup"))
                     let SupInf = poss.querySelector(".Infsup").value
                     if (SupInf == "supérieur") {
                         SupInf = true
