@@ -389,7 +389,7 @@ const ShowOptionChoice = (poss) => {
     html += ` <button class = "deletePoss btn btn-danger btn-sm"> Supprimer le choix </button>`
 
     html += `<h3> Relier ce choix a une branche </h3>
-    <label> Selectionné la branche relier </label>
+    <label> Sélectionner la branche relier </label>
     <select class="branchIDNext"> `
 
     if (poss.possible) {
@@ -562,7 +562,7 @@ const ShowOptionTest = (poss, i) => {
 const ShowOptionChange = (poss) => {
     let html = ""
     html += `<div class="branchingPoss shadow card PadCard"><h3> Relier cette branche a une autre </h3>
-        <label> Selectionné la branche suivante: </label>
+        <label> Sélectionner la branche suivante: </label>
         <select class="branchIDNext"> 
         `
     allBranches.forEach(branchFromAll => {
