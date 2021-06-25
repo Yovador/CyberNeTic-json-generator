@@ -260,24 +260,24 @@ const ShowAMessage = (message, remove, Ischoice) => {
 
         case "text":
             html += `
-                <option value=""> Choissisez un type de message </option>
-                <option value="text" selected="selected"> Text </option>
+                <option value=""> Choisissez un type de message </option>
+                <option value="text" selected="selected"> Texte </option>
                 <option value="image"> Image </option>
             `
             break;
 
         case "image":
             html += `
-                <option value=""> Choissisez un type de message </option>
-                <option value="text"> Text </option>
+                <option value=""> Choisissez un type de message </option>
+                <option value="text"> Texte </option>
                 <option value="image"  selected="selected"> Image </option>
             `
             break;
 
         default:
             html += `
-                <option value="" selected="selected"> Choissisez un type de message </option>
-                <option value="text"> Text </option>
+                <option value="" selected="selected"> Choisissez un type de message </option>
+                <option value="text"> Texte </option>
                 <option value="image"> Image </option>
             `
             break;
@@ -388,8 +388,8 @@ const ShowOptionChoice = (poss) => {
 
     html += ` <button class = "deletePoss btn btn-danger btn-sm"> Supprimer le choix </button>`
 
-    html += `<h3> Relier ce choix a une branche </h3>
-    <label> Sélectionner la branche relier </label>
+    html += `<h3> Relier ce choix à une branche </h3>
+    <label> Sélectionner la branche à relier </label>
     <select class="branchIDNext"> `
 
     if (poss.possible) {
@@ -561,7 +561,7 @@ const ShowOptionTest = (poss, i) => {
 }
 const ShowOptionChange = (poss) => {
     let html = ""
-    html += `<div class="branchingPoss shadow card PadCard"><h3> Relier cette branche a une autre </h3>
+    html += `<div class="branchingPoss shadow card PadCard"><h3> Relier cette branche à une autre </h3>
         <label> Sélectionner la branche suivante: </label>
         <select class="branchIDNext"> 
         `
@@ -591,16 +591,16 @@ const ShowBranchingPoint = (branch) => {
     html += `
     <div class="branchingPoint PadCard">
         <div class="shadow card PadCard Embranchement">
-        <label> A la fin de cette branche : </label> 
+        <label> À la fin de cette branche : </label> 
         <select class="bpType">
         
     `
     switch (branch.branchingPoint.type) {
         case "choice":
             html += `
-                    <option value="choice" selected="selected"> Crée un choix pour le joueur </option>
-                    <option value="test"> Crée un test de confiance </option>
-                    <option value="change"> Relier a une autre branche </option>
+                    <option value="choice" selected="selected"> Créer un choix pour le joueur </option>
+                    <option value="test"> Créer un test de confiance </option>
+                    <option value="change"> Relier à une autre branche </option>
                     <option value="stop"> Stopper la conversation</option>
                     </select>
                     </div>
@@ -612,9 +612,9 @@ const ShowBranchingPoint = (branch) => {
             break;
         case "test":
             html += `
-            <option value="choice" > Crée un choix pour le joueur </option>
-            <option value="test" selected="selected"> Crée un test de confiance </option>
-            <option value="change"> Relier a une autre branche </option>
+            <option value="choice" > Créer un choix pour le joueur </option>
+            <option value="test" selected="selected"> Créer un test de confiance </option>
+            <option value="change"> Relier à une autre branche </option>
             <option value="stop"> Stopper la conversation</option>
             </select>
             </div>
@@ -630,9 +630,9 @@ const ShowBranchingPoint = (branch) => {
             break;
         case "change":
             html += `
-            <option value="choice" > Crée un choix pour le joueur </option>
-            <option value="test"> Crée un test de confiance </option>
-            <option value="change" selected="selected"> Relier a une autre branche </option>
+            <option value="choice" > Créer un choix pour le joueur </option>
+            <option value="test"> Créer un test de confiance </option>
+            <option value="change" selected="selected"> Relier à une autre branche </option>
             <option value="stop"> Stopper la conversation</option>
             </select>
             </div>
@@ -647,9 +647,9 @@ const ShowBranchingPoint = (branch) => {
         case "stop":
             html += `
 
-            <option value="choice" > Crée un choix pour le joueur </option>
-            <option value="test"> Crée un test de confiance </option>
-            <option value="change"> Relier a une autre branche </option>
+            <option value="choice" > Créer un choix pour le joueur </option>
+            <option value="test"> Créer un test de confiance </option>
+            <option value="change"> Relier à une autre branche </option>
             <option value="stop" selected="selected"> Stopper la conversation</option>
             </select>
             </div>

@@ -121,7 +121,7 @@ const GenerateCharacterHtml = (characterHTML) => {
     </div>
     <div>
 
-        <label> nom de l'image de profil : </label>
+        <label> Nom de l'image de profil : </label>
         <div class="input-group tktfrere mb-3">
             <input type="text" class="charPP" value="${stringImg}"/>
             <div class="input-group-append">
